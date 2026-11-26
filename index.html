@@ -13,7 +13,8 @@
       --accent-yellow-soft: rgba(255, 210, 47, 0.35);
       --accent-red: #d92b2b;
       --accent-blue: #165a8a;
-      --card-bg: rgba(255, 255, 255, 0.9);
+      --accent-green: #15803d;
+      --card-bg: rgba(255, 255, 255, 0.92);
       --border: #dfe4ec;
       --shadow: 0 12px 32px rgba(24, 34, 48, 0.08);
     }
@@ -44,7 +45,7 @@
       justify-content: space-between;
       gap: 12px;
       padding: 12px 24px;
-      background: rgba(255, 255, 255, 0.92);
+      background: rgba(255, 255, 255, 0.94);
       border-bottom: 2px solid var(--accent-yellow);
       position: sticky;
       top: 0;
@@ -78,7 +79,7 @@
     }
 
     .container {
-      max-width: 1220px;
+      max-width: 1160px;
       margin: 0 auto;
       padding: 24px;
     }
@@ -89,7 +90,7 @@
 
     .lobby-grid {
       display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
+      grid-template-columns: 1.2fr 0.8fr;
       gap: 24px;
       align-items: stretch;
     }
@@ -102,12 +103,11 @@
 
     .panel-story,
     .panel-join,
-    .map-card,
-    .student-card {
+    .stage-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: 20px;
-      padding: 26px;
+      padding: 28px;
       box-shadow: var(--shadow);
     }
 
@@ -159,67 +159,31 @@
       background: #fff;
       border: 2px solid var(--accent-yellow);
       border-radius: 16px;
-      padding: 18px;
+      padding: 20px;
     }
 
     .qr-img {
-      width: 168px;
-      height: 168px;
+      width: 176px;
+      height: 176px;
       object-fit: contain;
       border-radius: 10px;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
 
-    .players-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 10px;
-    }
-
-    .badge-count {
-      background: var(--accent-red);
-      color: #fff;
-      font-weight: 700;
-      padding: 3px 11px;
-      border-radius: 999px;
-      font-size: 0.9rem;
-    }
-
-    .players-list {
-      max-height: 190px;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      padding-right: 4px;
-    }
-
-    .player-chip {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    .reg-status {
       background: #f8fafc;
       border: 1px solid #e2e8f0;
-      border-radius: 10px;
-      padding: 8px 12px;
+      border-radius: 12px;
+      padding: 12px 14px;
       font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    .reg-status.ready {
+      background: #ecfdf5;
+      border-color: #86efac;
+      color: #166534;
       font-weight: 600;
-    }
-
-    .player-chip-left {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .token-dot {
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      border: 2px solid #fff;
-      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25);
-      flex-shrink: 0;
     }
 
     .btn {
@@ -323,96 +287,13 @@
       color: var(--ink);
     }
 
-    .board-header-bar {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 16px 22px;
-      margin-bottom: 20px;
-      box-shadow: var(--shadow);
-    }
-
-    .track-grid {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 10px;
-      margin-top: 14px;
-    }
-
-    @media (max-width: 780px) {
-      .track-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
-    .cell {
-      min-height: 104px;
-      border-radius: 14px;
-      padding: 10px;
-      border: 1.5px solid #dde3ec;
-      background: rgba(255, 255, 255, 0.96);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .cell.clue-cell {
-      background: linear-gradient(180deg, #fffbe6 0%, #fff4c2 100%);
-      border-color: #eab308;
-    }
-
-    .cell.start-cell {
-      background: #eef7ff;
-      border-color: var(--accent-blue);
-    }
-
-    .cell.finish-cell {
-      background: linear-gradient(180deg, #ffe8e8 0%, #ffd1d1 100%);
-      border-color: var(--accent-red);
-    }
-
-    .cell-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 0.72rem;
-      font-weight: 800;
-      color: var(--muted);
-    }
-
-    .cell-clue-badge {
-      background: var(--accent-red);
-      color: #fff;
-      padding: 1px 6px;
-      border-radius: 6px;
-      font-size: 0.68rem;
-    }
-
-    .cell-label {
-      font-size: 0.78rem;
-      font-weight: 700;
-      line-height: 1.25;
-      margin-top: 6px;
-      color: var(--ink);
-    }
-
-    .student-card {
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
     .input-field {
       width: 100%;
       padding: 12px 14px;
       border: 1.5px solid #cbd5e1;
       border-radius: 12px;
       font-size: 1rem;
-      margin: 10px 0 14px;
+      margin: 10px 0 16px;
       background: #fff;
     }
 
@@ -421,74 +302,104 @@
       border-color: var(--accent-blue);
     }
 
-    .dice-box {
+    /* Экран этапа */
+    .stage-card {
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    .stage-top-bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: #fffdf5;
-      border: 1.5px solid var(--accent-yellow);
-      border-radius: 16px;
-      padding: 16px;
-      margin: 16px 0;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
     }
 
-    .dice-face {
-      width: 58px;
-      height: 58px;
-      border-radius: 14px;
-      background: #fff;
-      border: 2px solid var(--ink);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.7rem;
-      font-weight: 900;
-      box-shadow: 0 4px 0 var(--ink);
+    .stage-badge {
+      background: var(--accent-blue);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.82rem;
+      padding: 4px 12px;
+      border-radius: 999px;
     }
 
-    .quest-box {
-      background: #ffffff;
-      border: 2px solid var(--accent-blue);
-      border-radius: 16px;
-      padding: 18px;
-      margin-top: 14px;
-    }
-
-    .quest-module-tag {
-      display: inline-block;
+    .q-counter {
       background: var(--accent-yellow-soft);
+      border: 1px solid #eab308;
       color: var(--ink);
       font-weight: 700;
-      font-size: 0.78rem;
-      padding: 4px 10px;
-      border-radius: 8px;
-      margin-bottom: 8px;
+      font-size: 0.84rem;
+      padding: 4px 12px;
+      border-radius: 999px;
+    }
+
+    .stage-title {
+      font-size: 1.5rem;
+      line-height: 1.25;
+      margin-bottom: 12px;
+    }
+
+    .preface-box {
+      background: #fffdf5;
+      border-left: 4px solid var(--accent-yellow);
+      border-radius: 0 14px 14px 0;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      font-size: 0.95rem;
+    }
+
+    .preface-topic {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--accent-blue);
+      margin-bottom: 6px;
+    }
+
+    .question-block {
+      background: #fff;
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+    }
+
+    .question-text {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 12px;
     }
 
     .option-btn {
       width: 100%;
       text-align: left;
-      padding: 11px 14px;
-      border-radius: 10px;
+      padding: 12px 15px;
+      border-radius: 11px;
       border: 1.5px solid #cbd5e1;
       background: #f8fafc;
-      font-size: 0.94rem;
+      font-size: 0.95rem;
       font-weight: 600;
       cursor: pointer;
       margin-top: 8px;
       transition: all 0.15s ease;
     }
 
-    .option-btn:hover {
+    .option-btn:hover:not(:disabled) {
       border-color: var(--accent-blue);
       background: #eff6ff;
     }
 
+    .option-btn:disabled {
+      cursor: default;
+      opacity: 0.85;
+    }
+
     .feedback-msg {
-      margin-top: 12px;
-      padding: 10px 12px;
-      border-radius: 10px;
-      font-size: 0.9rem;
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      font-size: 0.92rem;
       font-weight: 600;
     }
 
@@ -500,6 +411,33 @@
     .feedback-err {
       background: #fee2e2;
       color: #991b1b;
+    }
+
+    .clue-found-box {
+      background: linear-gradient(180deg, #fffdf0 0%, #fff4c2 100%);
+      border: 2px solid #eab308;
+      border-radius: 18px;
+      padding: 22px;
+      margin-top: 16px;
+    }
+
+    .clue-found-label {
+      display: inline-block;
+      background: var(--accent-red);
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 999px;
+      margin-bottom: 8px;
+    }
+
+    .final-box {
+      background: #ecfdf5;
+      border: 2px solid #34d399;
+      border-radius: 18px;
+      padding: 24px;
+      margin-top: 16px;
     }
   </style>
 </head>
@@ -516,7 +454,7 @@
 
   <main class="container">
     <!-- ==================== СТАРТОВЫЙ ЭКРАН ==================== -->
-    <section id="viewLobby">
+    <section id="viewStart">
       <div class="lobby-grid">
         <div class="panel-story">
           <div class="tag-1c">1С:ERP • 7 УЛИК В 1С:ERP • ДЕТЕКТИВНОЕ РАССЛЕДОВАНИЕ</div>
@@ -535,19 +473,13 @@
             <div style="font-weight:800; font-size:0.95rem;">Сканируйте QR-код для входа со смартфона</div>
           </div>
 
-          <div>
-            <div class="players-header">
-              <span style="font-weight:800; font-size:1rem;">Зарегистрированные участники</span>
-              <span id="playersCountBadge" class="badge-count">0</span>
-            </div>
-            <div id="lobbyPlayersList" class="players-list">
-              <div style="color:var(--muted); font-size:0.88rem; padding:8px 0;">Нажмите «Зарегистрироваться», чтобы добавить участника.</div>
-            </div>
+          <div id="regStatusBox" class="reg-status">
+            Нажмите «Зарегистрироваться», введите ФИО, после чего станет доступен запуск расследования.
           </div>
 
           <div class="actions-row">
             <button id="btnOpenRegisterModal" class="btn btn-secondary" type="button" style="flex:1;">Зарегистрироваться</button>
-            <button id="btnStartGame" class="btn btn-primary" type="button" style="flex:1.4;" disabled>Старт расследования</button>
+            <button id="btnStartInvestigation" class="btn btn-primary" type="button" style="flex:1.25;" disabled>Старт расследования</button>
           </div>
         </div>
       </div>
@@ -557,85 +489,55 @@
     <div id="registerModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="registerModalTitle">
       <div class="modal-card">
         <div class="modal-header">
-          <h2 id="registerModalTitle" style="font-size:1.3rem;">Регистрация участника</h2>
+          <h2 id="registerModalTitle" style="font-size:1.3rem;">Регистрация</h2>
           <button id="btnCloseRegisterModal" class="modal-close" type="button" aria-label="Закрыть">&times;</button>
         </div>
-        <p style="font-size:0.9rem; color:var(--muted);">Введите ваши ФИО и нажмите «Зарегистрироваться». После этого ожидайте начала игры.</p>
-        <label for="modalStudentFioInput" style="display:block; font-weight:700; margin-top:14px;">Ваши ФИО</label>
-        <input id="modalStudentFioInput" class="input-field" type="text" placeholder="Например: Иванова Анна Сергеевна" maxlength="80" />
+        <p style="font-size:0.9rem; color:var(--muted);">Введите ваши ФИО и нажмите «Зарегистрироваться».</p>
+        <label for="studentFioInput" style="display:block; font-weight:700; margin-top:14px;">ФИО</label>
+        <input id="studentFioInput" class="input-field" type="text" placeholder="Например: Иванова Анна Сергеевна" maxlength="90" />
         <div class="actions-row">
           <button id="btnCancelRegisterModal" class="btn btn-ghost" type="button" style="flex:0.7;">Отмена</button>
-          <button id="btnModalRegisterStudent" class="btn btn-primary" type="button" style="flex:1.3;">Зарегистрироваться</button>
+          <button id="btnConfirmRegister" class="btn btn-primary" type="button" style="flex:1.3;">Зарегистрироваться</button>
         </div>
       </div>
     </div>
 
-    <!-- ==================== КАРТА РАССЛЕДОВАНИЯ (БЕЗ ОТОБРАЖЕНИЯ ПРОГРЕССА) ==================== -->
-    <section id="viewBoard" class="hidden">
-      <div class="board-header-bar">
-        <div>
-          <div style="font-size:0.8rem; font-weight:700; color:var(--accent-red);">РАССЛЕДОВАНИЕ НАЧАТО</div>
-          <h2 style="font-size:1.35rem;">Маршрут расследования: 7 улик в 1С:ERP</h2>
-        </div>
-        <div class="actions-row">
-          <button id="btnOpenCabinetFromBoard" class="btn btn-secondary" type="button">Открыть кабинет участника</button>
-          <button id="btnResetGame" class="btn btn-ghost" type="button">Новая игра</button>
-        </div>
-      </div>
-
-      <div class="map-card">
-        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
-          <span style="font-weight:800; font-size:0.95rem;">7 контуров 1С:ERP на пути к раскрытию дела</span>
-          <span style="font-size:0.8rem; color:var(--muted);">Жёлтые станции — тематические улики курса</span>
-        </div>
-        <div id="trackGrid" class="track-grid"></div>
-      </div>
-    </section>
-
-    <!-- ==================== КАБИНЕТ УЧАСТНИКА ==================== -->
-    <section id="viewStudent" class="hidden">
-      <div class="student-card">
-        <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:10px;">
-          <div class="tag-1c" style="margin-bottom:0;">КАБИНЕТ ДЕТЕКТИВА • 7 УЛИК В 1С:ERP</div>
-          <button id="btnBackToLobbyFromStudent" class="btn btn-ghost" type="button" style="padding:8px 14px; font-size:0.85rem;">На старт</button>
+    <!-- ==================== ЭКРАН ПРОХОЖДЕНИЯ ЭТАПА ==================== -->
+    <section id="viewStage" class="hidden">
+      <div class="stage-card">
+        <div class="stage-top-bar">
+          <span id="stageBadge" class="stage-badge">Этап 1 из 7</span>
+          <span id="questionCounter" class="q-counter">Вопрос 1 из 5</span>
         </div>
 
-        <div id="studentRegisterBox">
-          <h2 style="font-size:1.45rem; margin-bottom:6px;">Регистрация на расследование</h2>
-          <p style="font-size:0.9rem; color:var(--muted);">Введите ваши ФИО и нажмите «Зарегистрироваться».</p>
-          <label for="studentFioInput" style="display:block; font-weight:700; margin-top:14px;">Ваши ФИО</label>
-          <input id="studentFioInput" class="input-field" type="text" placeholder="Например: Иванова Анна Сергеевна" maxlength="80" />
-          <button id="btnRegisterStudent" class="btn btn-primary" type="button">Зарегистрироваться</button>
+        <h2 id="stageTitle" class="stage-title"></h2>
+
+        <div class="preface-box">
+          <div id="stageTopic" class="preface-topic"></div>
+          <p id="stagePreface"></p>
         </div>
 
-        <div id="studentGameBox" class="hidden">
-          <div style="margin-bottom:12px;">
-            <div id="studentNameDisplay" style="font-weight:800; font-size:1.15rem;"></div>
-            <div style="font-size:0.85rem; color:var(--muted);">Участник расследования «Дело о пропавшем балансе»</div>
+        <div id="questionArea" class="question-block">
+          <div id="questionText" class="question-text"></div>
+          <div id="optionsList"></div>
+          <div id="feedbackBox" class="feedback-msg hidden"></div>
+          <div id="nextQuestionWrap" class="hidden" style="margin-top:16px;">
+            <button id="btnNextQuestion" class="btn btn-primary" type="button">Следующий вопрос</button>
           </div>
+        </div>
 
-          <div id="studentWaitingBanner" class="story-box">
-            <strong>Вы зарегистрированы!</strong>
-            <p style="margin-top:6px;">Ожидайте, пока преподаватель нажмёт «Старт расследования».</p>
-          </div>
+        <div id="clueFoundBox" class="clue-found-box hidden">
+          <div class="clue-found-label">УЛИКА НАЙДЕНА</div>
+          <h3 id="clueFoundTitle" style="font-size:1.25rem; margin-bottom:8px;"></h3>
+          <p id="clueFoundDesc" style="margin-bottom:16px;"></p>
+          <button id="btnNextStage" class="btn btn-primary" type="button">Перейти к следующему этапу</button>
+        </div>
 
-          <div id="studentActiveControls" class="hidden">
-            <div class="dice-box">
-              <div>
-                <div style="font-weight:800; font-size:0.95rem;">Ход по расследованию</div>
-                <div id="diceHint" style="font-size:0.84rem; color:var(--muted);">Бросьте кубик, чтобы перейти к следующей улике</div>
-              </div>
-              <div id="diceFace" class="dice-face">🎲</div>
-            </div>
-            <button id="btnRollDice" class="btn btn-primary" type="button">Бросить кубик</button>
-
-            <div id="questContainer" class="quest-box hidden"></div>
-          </div>
-
-          <div id="studentFinishedBanner" class="story-box hidden" style="background:#ecfdf5; border-color:#34d399;">
-            <strong>Дело раскрыто!</strong>
-            <p style="margin-top:6px;">Вы прошли все 7 улик по контурам 1С:ERP и восстановили картину событий. Отличная работа детектива учёта!</p>
-          </div>
+        <div id="finalCaseBox" class="final-box hidden">
+          <div class="clue-found-label" style="background:var(--accent-green);">ДЕЛО РАСКРЫТО</div>
+          <h3 style="font-size:1.35rem; margin-bottom:8px;">Все 7 улик в 1С:ERP собраны!</h3>
+          <p style="margin-bottom:16px;">Вы прошли весь маршрут расследования, восстановили картину событий и доказали, что лучший детектив в компании — это бухгалтер.</p>
+          <button id="btnRestartGame" class="btn btn-secondary" type="button">Начать расследование заново</button>
         </div>
       </div>
     </section>
@@ -643,105 +545,428 @@
 
   <script>
     (function () {
-      const CLUES = [
+      // Структура из 7 этапов по 5 вопросов в каждом.
+      // По мере добавления лекций будем обновлять preface, clue и questions для каждого этапа.
+      const STAGES = [
         {
-          title: "Улика №1: Взлом контура",
-          module: "1. Архитектура и место 1С:ERP в современных корпоративных информационных системах",
-          question: "С чего начинается расследование аномалии в масштабе всего холдинга в 1С:ERP?",
-          options: [
-            "С определения, в какой функциональной подсистеме и уровне архитектуры нарушен поток данных",
-            "С ручного удаления записей из таблиц без анализа метаданных",
-            "С отключения всех регламентных заданий на сервере"
-          ],
-          correct: 0,
-          explain: "Верно! Понимание архитектуры и взаимосвязи подсистем 1С:ERP позволяет точно локализовать сбой."
+          clueName: "Улика №1: «Взлом контура»",
+          clueDesc: "Определён уровень архитектуры и функциональный контур 1С:ERP, где произошло первое вмешательство в поток учётных данных.",
+          topic: "Тема 1. Архитектура и место 1С:ERP в современных корпоративных информационных системах",
+          preface: "Расследование начинается с фундамента. Чтобы понять, кто и как подменил данные перед аудитом, нужно повторить архитектуру 1С:ERP и место её подсистем в контуре управления холдингом.",
+          questions: [
+            {
+              q: "1. Какое место занимает 1С:ERP в архитектуре корпоративных информационных систем предприятия?",
+              options: [
+                "Единая система управления ресурсами и учётом, объединяющая оперативный, производственный, финансовый и регламентированный контуры",
+                "Только автономный редактор печатных форм без связи с учётными регистрами",
+                "Исключительно инструмент для резервного копирования операционной системы"
+              ],
+              correct: 0,
+              explain: "Верно: 1С:ERP объединяет ключевые контуры управления и учёта в едином информационном пространстве."
+            },
+            {
+              q: "2. Зачем при расследовании сбоя в 1С:ERP сначала анализируют архитектуру и взаимосвязь подсистем?",
+              options: [
+                "Чтобы локализовать, в каком контуре возникло искажение и на какие связанные отчёты оно влияет",
+                "Чтобы отключить все отчёты до окончания проверки",
+                "Чтобы перенести базу на другой язык программирования"
+              ],
+              correct: 0,
+              explain: "Точно: понимание связей между подсистемами помогает быстро найти первопричину расхождений."
+            },
+            {
+              q: "3. Что характерно для многоуровневой архитектуры 1С:Предприятие / 1С:ERP?",
+              options: [
+                "Разделение клиентского приложения, сервера приложений/web-сервера и СУБД",
+                "Хранение всех настроек и данных исключительно в локальном текстовом файле пользователя",
+                "Невозможность работы нескольких пользователей одновременно"
+              ],
+              correct: 0,
+              explain: "Правильно: клиент-серверная архитектура разделяет интерфейс, бизнес-логику и хранение данных."
+            },
+            {
+              q: "4. Какую роль в 1С:ERP играет согласованность управленческого и регламентированного учёта?",
+              options: [
+                "Позволяет сопоставлять оперативно-управленческую картину и требования законодательства на единой базе данных",
+                "Означает, что управленческие данные вообще не зависят от хозяйственных операций",
+                "Используется только для ведения кадрового архива"
+              ],
+              correct: 0,
+              explain: "Верно: единая информационная база снижает разрывы между управленческим и регламентированным контурами."
+            },
+            {
+              q: "5. Какой вывод помогает зафиксировать первую улику перед проверкой конкретных операций?",
+              options: [
+                "Любая аномалия в отчётности должна быть привязана к конкретному контуру и этапу обработки данных",
+                "Аномалии в отчётах перед аудитом всегда вызваны случайным сбоем экрана",
+                "Проверять нужно только один последний документ за год"
+              ],
+              correct: 0,
+              explain: "Отлично! Первый контур проверен — улика №1 найдена."
+            }
+          ]
         },
         {
-          title: "Улика №2: Фантомная сделка",
-          module: "2. Автоматизация оперативного контура: процессы продаж и закупок в 1С:ERP",
-          question: "В заказах клиентов и заявках на закупку обнаружены странные расхождения по ценам и срокам. Какой документ управляет потребностями и ходом исполнения сделки?",
-          options: [
-            "Заказ клиента / Заказ поставщику и статусы их обеспечения",
-            "Только кассовый ордер на приход наличных",
-            "Акт об инвентаризации основных средств"
-          ],
-          correct: 0,
-          explain: "Точно! Оперативный контур 1С:ERP связывает заказы, обеспечения, закупки и отгрузки."
+          clueName: "Улика №2: «Фантомная сделка»",
+          clueDesc: "Выявлен подозрительный заказ и цепочка закупок с аномальными условиями, искажающими маржу сделки.",
+          topic: "Тема 2. Автоматизация оперативного контура: процессы продаж и закупок в 1С:ERP",
+          preface: "В отчётах падает маржа по ряду контрагентов. Повторяем логику продаж и закупок в 1С:ERP, чтобы вычислить «фантомную сделку».",
+          questions: [
+            {
+              q: "1. Какие документы лежат в основе управления продажами и закупками в оперативном контуре 1С:ERP?",
+              options: [
+                "Заказы клиентов, заказы поставщикам и связанные с ними документы обеспечения и реализации/поступления",
+                "Только приказы о приёме на работу",
+                "Исключительно акты сверки взаиморасчётов за прошлый год"
+              ],
+              correct: 0,
+              explain: "Верно: заказы задают потребности, условия и ход исполнения сделок."
+            },
+            {
+              q: "2. Зачем в 1С:ERP контролируют статусы и обеспечение заказов?",
+              options: [
+                "Чтобы видеть, покрыта ли потребность остатками, закупкой или производством и соблюдаются ли сроки",
+                "Чтобы скрывать невыполненные заказы от менеджеров",
+                "Только для расчёта налога на имущество"
+              ],
+              correct: 0,
+              explain: "Точно: статусы и обеспечение показывают реальное состояние исполнения заказа."
+            },
+            {
+              q: "3. Какой сигнал в цепочке продаж и закупок часто указывает на аномалию условий?",
+              options: [
+                "Резкое отклонение цен или условий поставки от согласованных параметров без экономического обоснования",
+                "Совпадение номенклатуры в заказе и накладной",
+                "Наличие заполненного реквизита организации"
+              ],
+              correct: 0,
+              explain: "Правильно: нетипичные цены и условия в сделках — частый источник потери маржи."
+            },
+            {
+              q: "4. Как связаны между собой процессы закупок и продаж при анализе маржинальности?",
+              options: [
+                "Закупочные цены и сопутствующие расходы формируют стоимость ресурсов, влияющую на итоговый результат продаж",
+                "Процессы закупок и продаж в 1С:ERP полностью изолированы друг от друга",
+                "Закупки влияют только на табель рабочего времени"
+              ],
+              correct: 0,
+              explain: "Верно: себестоимость и условия закупки напрямую определяют финансовый результат сделки."
+            },
+            {
+              q: "5. Что позволяет доказать, что сделка носит подозрительный характер?",
+              options: [
+                "Сопоставление условий заказа, обеспечения и фактического проведения операций по цепочке документа",
+                "Наличие красивого названия контрагента",
+                "Печать документа на цветном принтере"
+              ],
+              correct: 0,
+              explain: "Отлично! Цепочка сделки прослежена — улика №2 найдена."
+            }
+          ]
         },
         {
-          title: "Улика №3: Недостача на складе",
-          module: "3. Управление складами, запасами и персоналом в 1С:ERP",
-          question: "При сверке остатков выявлено расхождение между учётным количеством и фактической приёмкой/отгрузкой на складе. Что помогает контролировать движение по складам и ответственных лиц?",
-          options: [
-            "Складской учёт, ордерная схема документооборота и кадровые/графиковые данные персонала",
-            "Только справочник контрагентов",
-            "Настройка цветовой темы интерфейса"
-          ],
-          correct: 0,
-          explain: "Верно! Сопоставление складских операций, ордеров и работы персонала раскрывает источник расхождений."
+          clueName: "Улика №3: «Недостача на складе»",
+          clueDesc: "Сопоставлены складские движения, ордерный документооборот и смены сотрудников — источник расхождений по запасам установлен.",
+          topic: "Тема 3. Управление складами, запасами и персоналом в 1С:ERP",
+          preface: "На складе всплыла недостача, а следы в остатках пытались сгладить. Повторяем управление запасами, складскую логику и кадрово-графиковый учёт.",
+          questions: [
+            {
+              q: "1. В чём суть ордерной схемы складского учёта в 1С:ERP?",
+              options: [
+                "Разделение финансово-учётного оформления операции и фактической приёмки/отгрузки на складе по складским ордерам",
+                "Запрет на проведение любых складских операций до конца квартала",
+                "Хранение остатков только в виде текстовых примечаний"
+              ],
+              correct: 0,
+              explain: "Верно: ордерная схема разделяет учётный факт и физическое движение товаров на складе."
+            },
+            {
+              q: "2. Почему при расследовании недостачи важно сверить движения запасов и ордера?",
+              options: [
+                "Чтобы увидеть разрывы между отражением в учёте и фактическим приходом/расходом по ячейкам или складам",
+                "Чтобы удалить старые справочники номенклатуры",
+                "Чтобы изменить ставку НДС в учётной политике"
+              ],
+              correct: 0,
+              explain: "Точно: сверка документов и ордеров выявляет несоответствия движения запасов."
+            },
+            {
+              q: "3. Какую роль при разборе инцидента на складе играют данные о персонале и графиках смен?",
+              options: [
+                "Помогают установить, кто именно работал в смену и несёт ответственность за операции в спорный период",
+                "Используются только для расчёта амортизации зданий",
+                "Никак не связаны с операциями на складе"
+              ],
+              correct: 0,
+              explain: "Правильно: графики смен и ответственные лица помогают восстановить хронологию событий."
+            },
+            {
+              q: "4. Зачем в управлении запасами используют методы оценки стоимости и контроль остатков?",
+              options: [
+                "Для корректного списания запасов в расходы/себестоимость и предотвращения отрицательных или некорректных остатков",
+                "Только для оформления этикеток на коробки",
+                "Чтобы отключить инвентаризацию"
+              ],
+              correct: 0,
+              explain: "Верно: контроль остатков и правил оценки обеспечивает достоверность запасов."
+            },
+            {
+              q: "5. Что завершает проверку складского контура по этой улике?",
+              options: [
+                "Увязка складских движений, ордеров и смен персонала в единую картину без противоречий",
+                "Игнорирование расхождений при инвентаризации",
+                "Переименование склада в отчёте"
+              ],
+              correct: 0,
+              explain: "Отлично! Складские следы сопоставлены — улика №3 найдена."
+            }
+          ]
         },
         {
-          title: "Улика №4: Тайна себестоимости",
-          module: "4. Управление производством и ремонтами в 1С:ERP",
-          question: "Себестоимость готовой продукции резко выросла за период. Какие процессы в 1С:ERP необходимо проверить в первую очередь?",
-          options: [
-            "Этапы производства, распределение производственных затрат и затраты на ремонты оборудования",
-            "Только список сотрудников отдела маркетинга",
-            "Настройки печати счетов-фактур"
-          ],
-          correct: 0,
-          explain: "Отлично! Производственные этапы, маршрутные/ресурсные данные и ремонты напрямую влияют на себестоимость."
+          clueName: "Улика №4: «Тайна себестоимости»",
+          clueDesc: "Найдены этапы производства и внеплановые ремонты, куда утекли производственные затраты.",
+          topic: "Тема 4. Управление производством и ремонтами в 1С:ERP",
+          preface: "Себестоимость выпуска выросла, а маржа тает. Повторяем организацию производства, расчёт себестоимости и управление ремонтами оборудования.",
+          questions: [
+            {
+              q: "1. Как в 1С:ERP структурируется процесс изготовления продукции?",
+              options: [
+                "Через производственные этапы, ресурсы/материальные затраты и выпуск продукции/полуфабрикатов",
+                "Только через счёт-фактуру на реализацию",
+                "Исключительно через кассовую книгу"
+              ],
+              correct: 0,
+              explain: "Верно: этапы производства отражают ход технологического процесса и потребление ресурсов."
+            },
+            {
+              q: "2. Почему внеплановые ремонты оборудования важны при анализе себестоимости?",
+              options: [
+                "Они создают дополнительные затраты и простои, которые могут искажать плановую и фактическую себестоимость",
+                "Ремонты не отражаются в системе управления предприятием",
+                "Они уменьшают только количество номенклатурных позиций"
+              ],
+              correct: 0,
+              explain: "Точно: затраты на ремонты и простои оборудования напрямую влияют на экономику производства."
+            },
+            {
+              q: "3. Что необходимо проверить при резком росте себестоимости выпуска?",
+              options: [
+                "Распределение прямых и косвенных затрат, объёмы выпуска и статьи расходов по этапам и ремонтам",
+                "Только шрифт в отчёте",
+                "Настройки часового пояса на сервере"
+              ],
+              correct: 0,
+              explain: "Правильно: анализ распределения затрат по этапам и статьям раскрывает источник удорожания."
+            },
+            {
+              q: "4. Зачем в контуре ремонтов ведут учёт объектов и видов ремонтных работ?",
+              options: [
+                "Для планирования технического обслуживания, контроля затрат по оборудованию и предотвращения аварийных остановок",
+                "Только для учёта отпусков сотрудников",
+                "Чтобы не вести историю поломок"
+              ],
+              correct: 0,
+              explain: "Верно: учёт ремонтов помогает контролировать состояние оборудования и связанные расходы."
+            },
+            {
+              q: "5. Что подтверждает раскрытие «тайны себестоимости»?",
+              options: [
+                "Точное определение статей и этапов, куда ушли затраты сверх ожидаемого уровня",
+                "Случайный выбор любой цифры из оборотно-сальдовой ведомости",
+                "Отказ от проверки производственных этапов"
+              ],
+              correct: 0,
+              explain: "Отлично! Куда утекли затраты — ясно, улика №4 найдена."
+            }
+          ]
         },
         {
-          title: "Улика №5: Сигнал на мониторе целевых показателей",
-          module: "5. Управление финансами и мониторинг деятельности предприятия в 1С:ERP",
-          question: "Какой инструмент помогает руководителю и аналитику оперативно увидеть отклонения по марже, рентабельности и ключевым показателям?",
-          options: [
-            "Монитор целевых показателей и финансовые отчёты анализа деятельности предприятия",
-            "Список горячих клавиш текстового редактора",
-            "Журнал регистрации входа в ОС Windows"
-          ],
-          correct: 0,
-          explain: "Верно! Мониторинг целевых показателей быстро подсвечивает проблемные точки финансов."
+          clueName: "Улика №5: «Сигнал на мониторе целевых показателей»",
+          clueDesc: "Показатели монитора выявили главный источник утечки прибыли и отклонений от целевых ориентиров.",
+          topic: "Тема 5. Управление финансами и мониторинг деятельности предприятия в 1С:ERP",
+          preface: "Финансовый аналитик смотрит на монитор целевых показателей — там мигают тревожные сигналы. Повторяем финансовый контур и мониторинг деятельности.",
+          questions: [
+            {
+              q: "1. Для чего предназначен мониторинг целевых показателей в управлении предприятием?",
+              options: [
+                "Для оперативного контроля ключевых финансовых и управленческих метрик и выявления отклонений от плана/норм",
+                "Только для архивирования старых писем",
+                "Для замены всей бухгалтерской отчётности одной картинкой"
+              ],
+              correct: 0,
+              explain: "Верно: целевые показатели помогают быстро увидеть отклонения и точки внимания."
+            },
+            {
+              q: "2. Какие показатели помогают оценить финансовое состояние и прибыльность бизнеса?",
+              options: [
+                "Выручка, маржинальность/рентабельность, денежный поток, дебиторская и кредиторская задолженность",
+                "Только количество символов в описании товара",
+                "Число вкладок в браузере пользователя"
+              ],
+              correct: 0,
+              explain: "Точно: финансовые показатели связывают доходность, ликвидность и обязательства."
+            },
+            {
+              q: "3. Что следует сделать, когда индикатор на мониторе показывает красное отклонение?",
+              options: [
+                "Провалиться в детализирующие отчёты и первичные операции, чтобы найти причину отклонения",
+                "Скрыть показатель с экрана",
+                "Поменять целевое значение задним числом без анализа"
+              ],
+              correct: 0,
+              explain: "Правильно: индикатор сигнализирует о проблеме, а детализация до операций раскрывает причину."
+            },
+            {
+              q: "4. Какую роль играет бюджетирование и план-фактный анализ в управлении финансами?",
+              options: [
+                "Позволяет сравнивать плановые ориентиры с фактическими результатами и вовремя корректировать решения",
+                "Используется только в конце года для галочки",
+                "Заменяет контроль расчётов с поставщиками"
+              ],
+              correct: 0,
+              explain: "Верно: план-фактный анализ показывает, где фактический ход дел расходится с планом."
+            },
+            {
+              q: "5. Какой итог даёт работа с монитором целевых показателей в нашем расследовании?",
+              options: [
+                "Выделен главный финансовый источник утечки прибыли для дальнейшей проверки расчётов и учёта",
+                "Расследование завершается без проверки первичных данных",
+                "Все финансовые риски исчезают сами собой"
+              ],
+              correct: 0,
+              explain: "Отлично! Сигнал получен — улика №5 найдена."
+            }
+          ]
         },
         {
-          title: "Улика №6: Двойной след",
-          module: "6. Казначейство. Регламентированный и международный учёт в 1С:ERP",
-          question: "Нужно проверить движение денежных средств, корректность проводок по РСБУ и данные для международной отчётности. Какие контуры задействованы?",
-          options: [
-            "Казначейство, регламентированный учёт и подсистема международного учёта (МСФО)",
-            "Только справочник физических лиц",
-            "Исключительно настройки сетевого принтера"
-          ],
-          correct: 0,
-          explain: "Именно так! В 1С:ERP управленческий, казначейский, регламентированный и международный учёт работают согласованно."
+          clueName: "Улика №6: «Двойной след»",
+          clueDesc: "Сверены заявки на расходование денежных средств, проводки РСБУ и данные МСФО — расхождения сопоставлены.",
+          topic: "Тема 6. Казначейство. Регламентированный и международный учёт в 1С:ERP",
+          preface: "Часть платежей зависла, а в отчётности по разным стандартам видны расхождения. Повторяем казначейство, регламентированный учёт и МСФО.",
+          questions: [
+            {
+              q: "1. Какую задачу решает подсистема казначейства в 1С:ERP?",
+              options: [
+                "Управление денежными средствами, платёжным календарём, заявками на расходование ДС и банковскими/кассовыми операциями",
+                "Только ведение воинского учёта",
+                "Формирование каталога чертежей"
+              ],
+              correct: 0,
+              explain: "Верно: казначейство управляет движением денежных средств и платёжной дисциплиной."
+            },
+            {
+              q: "2. Зачем используют заявки на расходование денежных средств и платёжный календарь?",
+              options: [
+                "Чтобы согласовывать платежи, контролировать лимиты и избегать кассовых разрывов",
+                "Чтобы проводить платежи без проверки остатков на счетах",
+                "Только для печати квитанций"
+              ],
+              correct: 0,
+              explain: "Точно: согласование заявок и платёжный календарь защищают от кассовых разрывов и нецелевых выплат."
+            },
+            {
+              q: "3. В чём особенность регламентированного учёта в 1С:ERP?",
+              options: [
+                "Формирование учётных записей и отчётности по установленным национальным правилам (например, РСБУ) и налоговому учёту",
+                "Произвольный учёт без привязки к нормативным правилам",
+                "Использование только для расчёта бонусов в играх"
+              ],
+              correct: 0,
+              explain: "Правильно: регламентированный учёт обеспечивает соблюдение законодательных требований."
+            },
+            {
+              q: "4. Зачем параллельно или согласованно ведётся международный учёт (МСФО)?",
+              options: [
+                "Для подготовки отчётности по международным стандартам, понятной инвесторам, партнёрам и холдингу",
+                "Только для перевода заголовков таблиц на английский язык",
+                "Чтобы отменить бухгалтерские проводки"
+              ],
+              correct: 0,
+              explain: "Верно: МСФО даёт прозрачную отчётность по международным стандартам."
+            },
+            {
+              q: "5. Почему «двойной след» раскрывается при сверке казначейства, РСБУ и МСФО?",
+              options: [
+                "Сопоставление платёжных операций, проводок и правил отражения выявляет скрытые расхождения между контурами",
+                "Достаточно посмотреть только один остаток на начало года",
+                "Расхождения между стандартами никогда не требуют проверки"
+              ],
+              correct: 0,
+              explain: "Отлично! Платёжные и учётные следы сведены — улика №6 найдена."
+            }
+          ]
         },
         {
-          title: "Улика №7: Цифровой свидетель",
-          module: "7. Искусственный интеллект и инновационные сервисы в экосистеме 1С",
-          question: "На финальном этапе расследования мы сверяем аномалии и ускоряем анализ больших массивов данных. Какую роль играют современные сервисы и ИИ в экосистеме 1С?",
-          options: [
-            "Помогают в анализе данных, автоматизации рутинных проверок и интеллектуальной поддержке решений",
-            "Полностью заменяют бухгалтерскую методологию без проверки специалистом",
-            "Используются только для генерации картинок"
-          ],
-          correct: 0,
-          explain: "Блестяще! Все 7 улик собраны, и дело о пропавшем балансе раскрыто!"
+          clueName: "Улика №7: «Цифровой свидетель»",
+          clueDesc: "Интеллектуальные инструменты и сервисы экосистемы 1С помогли свести аномалии в единое досье и закрыть дело.",
+          topic: "Тема 7. Искусственный интеллект и инновационные сервисы в экосистеме 1С",
+          preface: "Финальный штрих перед приходом аудиторов! Повторяем, как ИИ и современные сервисы экосистемы 1С помогают анализировать данные и ускорять работу специалиста.",
+          questions: [
+            {
+              q: "1. Как искусственный интеллект и современные сервисы 1С помогают специалисту при анализе данных?",
+              options: [
+                "Помогают быстрее находить закономерности и аномалии, структурировать информацию и автоматизировать рутину",
+                "Полностью заменяют профессиональное суждение бухгалтера и аудитора",
+                "Работают только без подключения к информационной базе и данных"
+              ],
+              correct: 0,
+              explain: "Верно: ИИ и сервисы экосистемы 1С усиливают аналитику и снижают ручную нагрузку."
+            },
+            {
+              q: "2. Какой принцип остаётся обязательным при использовании ИИ-инструментов в учёте и анализе?",
+              options: [
+                "Человеческий контроль и проверка результатов по учётным данным и методологии",
+                "Слепое принятие любого сгенерированного ответа без сверки",
+                "Полный запрет на проверку выводов"
+              ],
+              correct: 0,
+              explain: "Точно: ответственность и финальная проверка всегда остаются за специалистом."
+            },
+            {
+              q: "3. Чем полезны облачные и дополнительные сервисы экосистемы 1С для бизнеса?",
+              options: [
+                "Расширяют возможности обмена данными, поддержки, администрирования и аналитики",
+                "Заменяют необходимость вести учёт хозяйственных операций",
+                "Используются только для хранения личных фотографий"
+              ],
+              correct: 0,
+              explain: "Правильно: сервисы экосистемы 1С дополняют систему удобными инструментами работы и поддержки."
+            },
+            {
+              q: "4. Какую роль играет «цифровой свидетель» в финале нашего расследования?",
+              options: [
+                "Помогает систематизировать выявленные аномалии по всем контурам 1С:ERP в итоговое доказательство",
+                "Стирает историю изменений базы перед аудитом",
+                "Подменяет результаты всех предыдущих этапов"
+              ],
+              correct: 0,
+              explain: "Верно: систематизация данных помогает собрать убедительное итоговое досье."
+            },
+            {
+              q: "5. Что означает успешное прохождение всех 7 этапов расследования?",
+              options: [
+                "Все 7 улик по контурам 1С:ERP собраны, логика системы понята, а баланс холдинга восстановлен",
+                "Осталось пропустить аудит",
+                "Система больше не нуждается в настройке"
+              ],
+              correct: 0,
+              explain: "Блестяще! Седьмая улика найдена, и дело о пропавшем балансе раскрыто!"
+            }
+          ]
         }
       ];
 
-      const TOKEN_COLORS = ["#d92b2b", "#165a8a", "#0d9488", "#d97706", "#7c3aed", "#db2777", "#2563eb", "#4f46e5"];
+      let registeredFio = "";
+      let currentStageIdx = 0;
+      let currentQuestionIdx = 0;
+      let questionAnsweredCorrectly = false;
 
-      const state = {
-        view: "lobby", // "lobby" | "board" | "student"
-        started: false,
-        registeredParticipants: [], // { id, fio, color }
-        activeStudent: {
-          fio: "",
-          clueIndex: 0, // 0..7
-          awaitingClue: false
-        }
-      };
+      const viewStart = document.getElementById("viewStart");
+      const viewStage = document.getElementById("viewStage");
+      const registerModal = document.getElementById("registerModal");
+      const studentFioInput = document.getElementById("studentFioInput");
+      const btnStartInvestigation = document.getElementById("btnStartInvestigation");
+      const regStatusBox = document.getElementById("regStatusBox");
 
       function escapeHtml(str) {
         return String(str)
@@ -751,284 +976,159 @@
           .replace(/"/g, "&quot;");
       }
 
-      function registerParticipant(rawFio) {
-        const fio = rawFio.trim().replace(/\s+/g, " ");
+      function openModal() {
+        registerModal.classList.remove("hidden");
+        studentFioInput.value = registeredFio;
+        setTimeout(() => studentFioInput.focus(), 40);
+      }
+
+      function closeModal() {
+        registerModal.classList.add("hidden");
+      }
+
+      function handleRegister() {
+        const fio = studentFioInput.value.trim().replace(/\s+/g, " ");
         if (fio.length < 3) {
           alert("Пожалуйста, введите ваши ФИО.");
-          return false;
-        }
-
-        let existing = state.registeredParticipants.find((p) => p.fio.toLowerCase() === fio.toLowerCase());
-        if (!existing) {
-          existing = {
-            id: "u_" + Math.random().toString(36).slice(2, 9),
-            fio,
-            color: TOKEN_COLORS[state.registeredParticipants.length % TOKEN_COLORS.length]
-          };
-          state.registeredParticipants.push(existing);
-        }
-
-        state.activeStudent = {
-          fio: existing.fio,
-          clueIndex: 0,
-          awaitingClue: false
-        };
-        state.view = "student";
-        renderAll();
-        return true;
-      }
-
-      function openRegisterModal() {
-        const modal = document.getElementById("registerModal");
-        const input = document.getElementById("modalStudentFioInput");
-        modal.classList.remove("hidden");
-        setTimeout(() => input.focus(), 50);
-      }
-
-      function closeRegisterModal() {
-        const modal = document.getElementById("registerModal");
-        const input = document.getElementById("modalStudentFioInput");
-        modal.classList.add("hidden");
-        input.value = "";
-      }
-
-      function renderLobby() {
-        const count = state.registeredParticipants.length;
-        document.getElementById("playersCountBadge").textContent = String(count);
-        document.getElementById("btnStartGame").disabled = count === 0;
-
-        const listEl = document.getElementById("lobbyPlayersList");
-        if (count === 0) {
-          listEl.innerHTML = '<div style="color:var(--muted); font-size:0.88rem; padding:8px 0;">Нажмите «Зарегистрироваться», чтобы добавить участника.</div>';
           return;
         }
+        registeredFio = fio;
+        btnStartInvestigation.disabled = false;
+        regStatusBox.classList.add("ready");
+        regStatusBox.textContent = `Регистрация выполнена: ${fio}. Нажмите «Старт расследования», чтобы начать.`;
+        closeModal();
+      }
 
-        listEl.innerHTML = state.registeredParticipants
+      function renderQuestion() {
+        const stage = STAGES[currentStageIdx];
+        const qItem = stage.questions[currentQuestionIdx];
+        questionAnsweredCorrectly = false;
+
+        document.getElementById("stageBadge").textContent = `Этап ${currentStageIdx + 1} из ${STAGES.length}`;
+        document.getElementById("questionCounter").textContent = `Вопрос ${currentQuestionIdx + 1} из ${stage.questions.length}`;
+        document.getElementById("stageTitle").textContent = stage.clueName;
+        document.getElementById("stageTopic").textContent = stage.topic;
+        document.getElementById("stagePreface").textContent = stage.preface;
+
+        document.getElementById("questionArea").classList.remove("hidden");
+        document.getElementById("clueFoundBox").classList.add("hidden");
+        document.getElementById("finalCaseBox").classList.add("hidden");
+
+        document.getElementById("questionText").textContent = qItem.q;
+        const feedbackBox = document.getElementById("feedbackBox");
+        feedbackBox.classList.add("hidden");
+        feedbackBox.textContent = "";
+
+        const nextWrap = document.getElementById("nextQuestionWrap");
+        nextWrap.classList.add("hidden");
+
+        const optionsList = document.getElementById("optionsList");
+        optionsList.innerHTML = qItem.options
           .map(
-            (p) => `
-          <div class="player-chip">
-            <div class="player-chip-left">
-              <span class="token-dot" style="background:${p.color};"></span>
-              <span>${escapeHtml(p.fio)}</span>
-            </div>
-            <span style="font-size:0.78rem; color:var(--muted);">${state.started ? "В игре" : "Ожидает старта"}</span>
-          </div>`
+            (opt, idx) =>
+              `<button class="option-btn" type="button" data-idx="${idx}">${escapeHtml(opt)}</button>`
           )
           .join("");
-      }
 
-      function renderBoard() {
-        const gridEl = document.getElementById("trackGrid");
-        let html = `
-          <div class="cell start-cell">
-            <div class="cell-top"><span>СТАРТ</span></div>
-            <div class="cell-label">Кабинет бухгалтера-сыщика</div>
-          </div>`;
-
-        CLUES.forEach((clue, idx) => {
-          const isLast = idx === CLUES.length - 1;
-          html += `
-            <div class="cell ${isLast ? "finish-cell" : "clue-cell"}">
-              <div class="cell-top">
-                <span>УЛИКА ${idx + 1}</span>
-                <span class="cell-clue-badge">${isLast ? "ФИНИШ" : "1С"}</span>
-              </div>
-              <div class="cell-label">${escapeHtml(clue.title.replace(/^Улика №\d+:\s*/, ""))}</div>
-            </div>`;
-        });
-
-        gridEl.innerHTML = html;
-      }
-
-      function renderStudent() {
-        const regBox = document.getElementById("studentRegisterBox");
-        const gameBox = document.getElementById("studentGameBox");
-
-        if (!state.activeStudent.fio) {
-          regBox.classList.remove("hidden");
-          gameBox.classList.add("hidden");
-          return;
-        }
-
-        regBox.classList.add("hidden");
-        gameBox.classList.remove("hidden");
-        document.getElementById("studentNameDisplay").textContent = state.activeStudent.fio;
-
-        const waitEl = document.getElementById("studentWaitingBanner");
-        const activeEl = document.getElementById("studentActiveControls");
-        const finEl = document.getElementById("studentFinishedBanner");
-
-        if (!state.started) {
-          waitEl.classList.remove("hidden");
-          activeEl.classList.add("hidden");
-          finEl.classList.add("hidden");
-          return;
-        }
-
-        waitEl.classList.add("hidden");
-
-        if (state.activeStudent.clueIndex >= CLUES.length) {
-          activeEl.classList.add("hidden");
-          finEl.classList.remove("hidden");
-          return;
-        }
-
-        finEl.classList.add("hidden");
-        activeEl.classList.remove("hidden");
-
-        const rollBtn = document.getElementById("btnRollDice");
-        const questBox = document.getElementById("questContainer");
-        const diceHint = document.getElementById("diceHint");
-
-        if (state.activeStudent.awaitingClue) {
-          rollBtn.disabled = true;
-          diceHint.textContent = "Ответьте на вопрос по улике ниже";
-          questBox.classList.remove("hidden");
-          renderQuest(CLUES[state.activeStudent.clueIndex]);
-        } else {
-          rollBtn.disabled = false;
-          diceHint.textContent = "Бросьте кубик, чтобы открыть следующую улику";
-          questBox.classList.add("hidden");
-        }
-      }
-
-      function renderQuest(clue) {
-        const questBox = document.getElementById("questContainer");
-        questBox.innerHTML = `
-          <div class="quest-module-tag">${escapeHtml(clue.module)}</div>
-          <h3 style="font-size:1.1rem; margin-bottom:8px;">${escapeHtml(clue.title)}</h3>
-          <p style="font-size:0.95rem; margin-bottom:10px;">${escapeHtml(clue.question)}</p>
-          <div>
-            ${clue.options
-              .map(
-                (opt, idx) =>
-                  `<button class="option-btn" type="button" data-opt="${idx}">${escapeHtml(opt)}</button>`
-              )
-              .join("")}
-          </div>
-          <div id="questFeedback" class="feedback-msg hidden"></div>
-        `;
-
-        questBox.querySelectorAll(".option-btn").forEach((btn) => {
+        optionsList.querySelectorAll(".option-btn").forEach((btn) => {
           btn.addEventListener("click", () => {
-            const chosen = Number(btn.getAttribute("data-opt"));
-            const fb = document.getElementById("questFeedback");
-            fb.classList.remove("hidden");
+            if (questionAnsweredCorrectly) return;
+            const chosen = Number(btn.getAttribute("data-idx"));
+            feedbackBox.classList.remove("hidden");
 
-            if (chosen === clue.correct) {
-              fb.className = "feedback-msg feedback-ok";
-              fb.textContent = clue.explain;
+            if (chosen === qItem.correct) {
+              questionAnsweredCorrectly = true;
+              feedbackBox.className = "feedback-msg feedback-ok";
+              feedbackBox.textContent = qItem.explain;
 
-              setTimeout(() => {
-                state.activeStudent.clueIndex += 1;
-                state.activeStudent.awaitingClue = false;
-                renderAll();
-              }, 650);
+              optionsList.querySelectorAll(".option-btn").forEach((b) => {
+                b.disabled = true;
+              });
+
+              const isLastQuestion = currentQuestionIdx === stage.questions.length - 1;
+              const nextBtn = document.getElementById("btnNextQuestion");
+              nextBtn.textContent = isLastQuestion ? "Открыть найденную улику" : "Следующий вопрос";
+              nextWrap.classList.remove("hidden");
             } else {
-              fb.className = "feedback-msg feedback-err";
-              fb.textContent = "След не сошёлся! Попробуйте другой вариант.";
+              feedbackBox.className = "feedback-msg feedback-err";
+              feedbackBox.textContent = "Ответ неверный. Попробуйте выбрать другой вариант.";
             }
           });
         });
       }
 
-      function renderAll() {
-        const viewLobby = document.getElementById("viewLobby");
-        const viewBoard = document.getElementById("viewBoard");
-        const viewStudent = document.getElementById("viewStudent");
+      function showClueFound() {
+        const stage = STAGES[currentStageIdx];
+        document.getElementById("questionArea").classList.add("hidden");
 
-        viewLobby.classList.add("hidden");
-        viewBoard.classList.add("hidden");
-        viewStudent.classList.add("hidden");
-
-        if (state.view === "student") {
-          viewStudent.classList.remove("hidden");
-          renderStudent();
-        } else if (state.view === "board") {
-          viewBoard.classList.remove("hidden");
-          renderBoard();
+        const isLastStage = currentStageIdx === STAGES.length - 1;
+        if (isLastStage) {
+          document.getElementById("finalCaseBox").classList.remove("hidden");
         } else {
-          viewLobby.classList.remove("hidden");
-          renderLobby();
+          const clueBox = document.getElementById("clueFoundBox");
+          clueBox.classList.remove("hidden");
+          document.getElementById("clueFoundTitle").textContent = stage.clueName;
+          document.getElementById("clueFoundDesc").textContent = stage.clueDesc;
+          document.getElementById("btnNextStage").textContent = `Перейти к этапу ${currentStageIdx + 2}`;
         }
       }
 
-      document.getElementById("btnOpenRegisterModal").addEventListener("click", openRegisterModal);
-      document.getElementById("btnCloseRegisterModal").addEventListener("click", closeRegisterModal);
-      document.getElementById("btnCancelRegisterModal").addEventListener("click", closeRegisterModal);
+      function startGame() {
+        if (!registeredFio) return;
+        currentStageIdx = 0;
+        currentQuestionIdx = 0;
+        viewStart.classList.add("hidden");
+        viewStage.classList.remove("hidden");
+        renderQuestion();
+      }
 
-      document.getElementById("registerModal").addEventListener("click", (ev) => {
-        if (ev.target.id === "registerModal") {
-          closeRegisterModal();
-        }
+      function resetGame() {
+        currentStageIdx = 0;
+        currentQuestionIdx = 0;
+        questionAnsweredCorrectly = false;
+        viewStage.classList.add("hidden");
+        viewStart.classList.remove("hidden");
+      }
+
+      document.getElementById("btnOpenRegisterModal").addEventListener("click", openModal);
+      document.getElementById("btnCloseRegisterModal").addEventListener("click", closeModal);
+      document.getElementById("btnCancelRegisterModal").addEventListener("click", closeModal);
+
+      registerModal.addEventListener("click", (ev) => {
+        if (ev.target === registerModal) closeModal();
       });
 
-      document.getElementById("btnModalRegisterStudent").addEventListener("click", () => {
-        const input = document.getElementById("modalStudentFioInput");
-        if (registerParticipant(input.value)) {
-          closeRegisterModal();
-        }
-      });
-
-      document.getElementById("modalStudentFioInput").addEventListener("keydown", (ev) => {
+      document.getElementById("btnConfirmRegister").addEventListener("click", handleRegister);
+      studentFioInput.addEventListener("keydown", (ev) => {
         if (ev.key === "Enter") {
           ev.preventDefault();
-          document.getElementById("btnModalRegisterStudent").click();
+          handleRegister();
         }
       });
 
-      document.getElementById("btnRegisterStudent").addEventListener("click", () => {
-        const input = document.getElementById("studentFioInput");
-        if (registerParticipant(input.value)) {
-          input.value = "";
+      btnStartInvestigation.addEventListener("click", startGame);
+
+      document.getElementById("btnNextQuestion").addEventListener("click", () => {
+        const stage = STAGES[currentStageIdx];
+        if (currentQuestionIdx < stage.questions.length - 1) {
+          currentQuestionIdx += 1;
+          renderQuestion();
+        } else {
+          showClueFound();
         }
       });
 
-      document.getElementById("studentFioInput").addEventListener("keydown", (ev) => {
-        if (ev.key === "Enter") {
-          ev.preventDefault();
-          document.getElementById("btnRegisterStudent").click();
+      document.getElementById("btnNextStage").addEventListener("click", () => {
+        if (currentStageIdx < STAGES.length - 1) {
+          currentStageIdx += 1;
+          currentQuestionIdx = 0;
+          renderQuestion();
+        } else {
+          showClueFound();
         }
       });
 
-      document.getElementById("btnStartGame").addEventListener("click", () => {
-        if (state.registeredParticipants.length === 0) return;
-        state.started = true;
-        state.view = "board";
-        renderAll();
-      });
-
-      document.getElementById("btnOpenCabinetFromBoard").addEventListener("click", () => {
-        if (!state.activeStudent.fio && state.registeredParticipants.length > 0) {
-          state.activeStudent.fio = state.registeredParticipants[0].fio;
-        }
-        state.view = "student";
-        renderAll();
-      });
-
-      document.getElementById("btnBackToLobbyFromStudent").addEventListener("click", () => {
-        state.view = "lobby";
-        renderAll();
-      });
-
-      document.getElementById("btnResetGame").addEventListener("click", () => {
-        state.view = "lobby";
-        state.started = false;
-        state.registeredParticipants = [];
-        state.activeStudent = { fio: "", clueIndex: 0, awaitingClue: false };
-        document.getElementById("diceFace").textContent = "🎲";
-        renderAll();
-      });
-
-      document.getElementById("btnRollDice").addEventListener("click", () => {
-        if (!state.started || state.activeStudent.clueIndex >= CLUES.length) return;
-        const roll = Math.floor(Math.random() * 6) + 1;
-        document.getElementById("diceFace").textContent = String(roll);
-        state.activeStudent.awaitingClue = true;
-        renderStudent();
-      });
-
-      renderAll();
+      document.getElementById("btnRestartGame").addEventListener("click", resetGame);
     })();
   </script>
 </body>
