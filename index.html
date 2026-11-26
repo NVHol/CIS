@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Дело о пропавшем балансе: 7 улик в 1С:ERP — БГУТ</title>
+  <style>
+    :root {
+      --bg-paper: #fcfbf7;
+      --ink: #1e242b;
+      --muted: #5c6672;
+      --accent-yellow: #ffd22f;
+      --accent-yellow-soft: rgba(255, 210, 47, 0.35);
+      --accent-red: #d92b2b;
+      --accent-blue: #165a8a;
+      --card-bg: rgba(255, 255, 255, 0.88);
+      --border: #dfe4ec;
+      --shadow: 0 12px 32px rgba(24, 34, 48, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+      color: var(--ink);
+      background-color: var(--bg-paper);
+      background-image: url("fon.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    .topbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 24px;
+      background: rgba(255, 255, 255, 0.9);
+      border-bottom: 2px solid var(--accent-yellow);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(8px);
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .emblem-img {
+      width: 46px;
+      height: 52px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .brand-title {
+      font-weight: 800;
+      font-size: 1.05rem;
+      letter-spacing: 0.4px;
+      color: var(--accent-blue);
+    }
+
+    .brand-sub {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .container {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .lobby-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    @media (max-width: 960px) {
+      .lobby-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .panel-story {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tag-1c {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent-yellow-soft);
+      border-left: 4px solid var(--accent-red);
+      padding: 6px 14px;
+      border-radius: 0 8px 8px 0;
+      font-weight: 700;
+      font-size: 0.85rem;
+      margin-bottom: 14px;
+    }
+
+    h1.game-title {
+      font-size: 2rem;
+      line-height: 1.2;
+      margin-bottom: 14px;
+      color: var(--ink);
+    }
+
+    h1.game-title span {
+      color: var(--accent-red);
+    }
+
+    .story-box {
+      background: rgba(255, 253, 245, 0.95);
+      border: 1px dashed #e5c349;
+      border-radius: 14px;
+      padding: 18px 20px;
+      margin-bottom: 10px;
+      font-size: 0.98rem;
+    }
+
+    .story-box p + p {
+      margin-top: 10px;
+    }
+
+    .panel-join {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .qr-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      background: #fff;
+      border: 2px solid var(--accent-yellow);
+      border-radius: 16px;
+      padding: 18px;
+    }
+
+    .qr-img {
+      width: 164px;
+      height: 164px;
+      object-fit: contain;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    .players-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .badge-count {
+      background: var(--accent-red);
+      color: #fff;
+      font-weight: 700;
+      padding: 3px 11px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+    }
+
+    .players-list {
+      max-height: 210px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding-right: 4px;
+    }
+
+    .player-chip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 8px 12px;
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+
+    .player-chip-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .token-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25);
+      flex-shrink: 0;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 12px;
+      padding: 13px 20px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.12s ease, opacity 0.2s ease, background 0.2s ease;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .btn-primary {
+      background: var(--accent-red);
+      color: #fff;
+      width: 100%;
+      box-shadow: 0 6px 18px rgba(217, 43, 43, 0.28);
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background: #b91f1f;
+    }
+
+    .btn-secondary {
+      background: var(--accent-yellow);
+      color: var(--ink);
+    }
+
+    .btn-ghost {
+      background: #eef2f6;
+      color: var(--ink);
+    }
+
+    .actions-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .board-header-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px 22px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .board-main-grid {
+      display: grid;
+      grid-template-columns: 1.55fr 0.95fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    @media (max-width: 1040px) {
+      .board-main-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .map-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .track-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    @media (max-width: 720px) {
+      .track-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .cell {
+      min-height: 112px;
+      border-radius: 14px;
+      padding: 8px;
+      border: 1.5px solid #dde3ec;
+      background: rgba(255, 255, 255, 0.95);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .cell.clue-cell {
+      background: linear-gradient(180deg, #fffbe6 0%, #fff4c2 100%);
+      border-color: #eab308;
+    }
+
+    .cell.start-cell {
+      background: #eef7ff;
+      border-color: var(--accent-blue);
+    }
+
+    .cell.finish-cell {
+      background: linear-gradient(180deg, #ffe8e8 0%, #ffd1d1 100%);
+      border-color: var(--accent-red);
+    }
+
+    .cell-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--muted);
+    }
+
+    .cell-clue-badge {
+      background: var(--accent-red);
+      color: #fff;
+      padding: 1px 6px;
+      border-radius: 6px;
+      font-size: 0.68rem;
+    }
+
+    .cell-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 4px 0;
+      color: var(--ink);
+    }
+
+    .cell-tokens {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      min-height: 22px;
+    }
+
+    .map-token {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      color: #fff;
+      font-size: 0.68rem;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #fff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.28);
+      cursor: default;
+    }
+
+    .side-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .side-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .progress-row {
+      margin-bottom: 12px;
+    }
+
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.86rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .progress-bar-bg {
+      height: 10px;
+      background: #e9eef5;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-yellow), var(--accent-red));
+      border-radius: 999px;
+      transition: width 0.35s ease;
+    }
+
+    .log-list {
+      max-height: 220px;
+      overflow-y: auto;
+      font-size: 0.84rem;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .log-item {
+      padding: 8px 10px;
+      background: #f8fafc;
+      border-left: 3px solid var(--accent-blue);
+      border-radius: 6px;
+    }
+
+    .podium-wrap {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      align-items: end;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 720px) {
+      .podium-wrap {
+        grid-template-columns: 1fr;
+        align-items: stretch;
+      }
+    }
+
+    .podium-place {
+      background: #fff;
+      border-radius: 18px;
+      padding: 20px;
+      text-align: center;
+      border: 2px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .podium-place.first {
+      border-color: #eab308;
+      background: linear-gradient(180deg, #fffdf0 0%, #fff4bd 100%);
+      transform: translateY(-10px);
+    }
+
+    .podium-place.second {
+      border-color: #94a3b8;
+    }
+
+    .podium-place.third {
+      border-color: #d97706;
+    }
+
+    .medal {
+      font-size: 2rem;
+      margin-bottom: 6px;
+    }
+
+    .student-card {
+      max-width: 580px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 26px;
+      box-shadow: var(--shadow);
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 12px;
+      font-size: 1rem;
+      margin: 10px 0 14px;
+      background: #fff;
+    }
+
+    .input-field:focus {
+      outline: none;
+      border-color: var(--accent-blue);
+    }
+
+    .dice-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #fffdf5;
+      border: 1.5px solid var(--accent-yellow);
+      border-radius: 16px;
+      padding: 16px;
+      margin: 16px 0;
+    }
+
+    .dice-face {
+      width: 58px;
+      height: 58px;
+      border-radius: 14px;
+      background: #fff;
+      border: 2px solid var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.7rem;
+      font-weight: 900;
+      box-shadow: 0 4px 0 var(--ink);
+    }
+
+    .quest-box {
+      background: #ffffff;
+      border: 2px solid var(--accent-blue);
+      border-radius: 16px;
+      padding: 18px;
+      margin-top: 14px;
+    }
+
+    .quest-module-tag {
+      display: inline-block;
+      background: var(--accent-yellow-soft);
+      color: var(--ink);
+      font-weight: 700;
+      font-size: 0.78rem;
+      padding: 4px 10px;
+      border-radius: 8px;
+      margin-bottom: 8px;
+    }
+
+    .option-btn {
+      width: 100%;
+      text-align: left;
+      padding: 11px 14px;
+      border-radius: 10px;
+      border: 1.5px solid #cbd5e1;
+      background: #f8fafc;
+      font-size: 0.94rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: all 0.15s ease;
+    }
+
+    .option-btn:hover {
+      border-color: var(--accent-blue);
+      background: #eff6ff;
+    }
+
+    .feedback-msg {
+      margin-top: 12px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .feedback-ok {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .feedback-err {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-group">
+      <img src="emblem.png" alt="Эмблема БГУТ" class="emblem-img" />
+      <div>
+        <div class="brand-title">БГУТ • КИС в бухгалтерском учёте, анализе и аудите</div>
+        <div class="brand-sub">Интерактивная игра «Дело о пропавшем балансе: 7 улик в 1С:ERP»</div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- ==================== ЭКРАН МУЛЬТИБОРДА: РЕГИСТРАЦИЯ ==================== -->
+    <section id="viewLobby">
+      <div class="lobby-grid">
+        <div class="panel-story">
+          <div class="tag-1c">1С:ERP • ДЕТЕКТИВНОЕ РАССЛЕДОВАНИЕ</div>
+          <h1 class="game-title">Дело о пропавшем балансе: <span>7 улик в 1С:ERP</span></h1>
+
+          <div class="story-box">
+            <p><strong>Предыстория:</strong> Ты — штатный бухгалтер крупного холдинга, который по ночам зачитывается детективами и давно мечтает о настоящем расследовании. И вот твой звёздный час настал!</p>
+            <p>За день до годового аудита в корпоративной базе 1С:ERP начинают происходить странные вещи: в отчётах всплывают загадочные расхождения, исчезает маржа, зависают платежи, а кто-то аккуратно подчистил следы в регистрах. Чтобы раскрыть это дело, не нужны лупа и плащ — достаточно блестяще знать корпоративную информационную систему.</p>
+            <p>Тебя ждёт цепочка из 7 зашифрованных улик, каждая из которых спрятана в одном из контуров 1С:ERP — от архитектуры системы до искусственного интеллекта 1С. Пройди весь маршрут расследования, восстанови картину событий и докажи, что лучший детектив в компании — это бухгалтер!</p>
+          </div>
+        </div>
+
+        <div class="panel-join">
+          <div class="qr-block">
+            <img src="qr.jpg" alt="QR-код для подключения" class="qr-img" />
+            <div style="font-weight:800; font-size:0.95rem;">Сканируйте QR-код для входа со смартфона</div>
+          </div>
+
+          <div>
+            <div class="players-header">
+              <span style="font-weight:800; font-size:1rem;">Подключившиеся участники</span>
+              <span id="playersCountBadge" class="badge-count">0</span>
+            </div>
+            <div id="lobbyPlayersList" class="players-list">
+              <div style="color:var(--muted); font-size:0.88rem; padding:8px 0;">Ожидаем подключения студентов по QR-коду...</div>
+            </div>
+          </div>
+
+          <div class="actions-row">
+            <button id="btnAddDemo" class="btn btn-ghost" type="button" style="flex:1;">+ Тестовые студенты</button>
+            <button id="btnStartGame" class="btn btn-primary" type="button" style="flex:1.6;" disabled>Старт расследования</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== ЭКРАН МУЛЬТИБОРДА: КАРТА И ПЬЕДЕСТАЛ ==================== -->
+    <section id="viewBoard" class="hidden">
+      <div class="board-header-bar">
+        <div>
+          <div style="font-size:0.8rem; font-weight:700; color:var(--accent-red);">РАССЛЕДОВАНИЕ В ХОДЕ</div>
+          <h2 style="font-size:1.35rem;">Карта расследования: 7 улик в 1С:ERP</h2>
+        </div>
+        <div class="actions-row">
+          <button id="btnFinishDemo" class="btn btn-secondary" type="button">Завершить / Показать пьедестал</button>
+          <button id="btnResetGame" class="btn btn-ghost" type="button">Новая игра</button>
+        </div>
+      </div>
+
+      <div id="podiumSection" class="side-card hidden" style="margin-bottom:20px;">
+        <h3 style="text-align:center; font-size:1.35rem;">Пьедестал лучших детективов учёта</h3>
+        <div id="podiumGrid" class="podium-wrap"></div>
+      </div>
+
+      <div class="board-main-grid">
+        <div class="map-card">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+            <span style="font-weight:800; font-size:0.95rem;">Маршрут (21 клетка • 7 станций с уликами)</span>
+            <span style="font-size:0.8rem; color:var(--muted);">Жёлтые клетки — обязательные улики по темам курса</span>
+          </div>
+          <div id="trackGrid" class="track-grid"></div>
+        </div>
+
+        <div class="side-stack">
+          <div class="side-card">
+            <h3 style="font-size:1.05rem; margin-bottom:12px;">Прогресс участников</h3>
+            <div id="boardProgressList"></div>
+          </div>
+
+          <div class="side-card">
+            <h3 style="font-size:1.05rem; margin-bottom:10px;">Журнал расследования</h3>
+            <div id="activityLog" class="log-list"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== ЭКРАН СТУДЕНТА ==================== -->
+    <section id="viewStudent" class="hidden">
+      <div class="student-card">
+        <div class="tag-1c">КАБИНЕТ ДЕТЕКТИВА • 1С:ERP</div>
+
+        <div id="studentRegisterBox">
+          <h2 style="font-size:1.45rem; margin-bottom:6px;">Регистрация на расследование</h2>
+          <p style="font-size:0.9rem; color:var(--muted);">Введите фамилию, имя и отчество, чтобы получить фишку и подключиться к общему экрану.</p>
+          <label for="studentFioInput" style="display:block; font-weight:700; margin-top:14px;">Ваши ФИО</label>
+          <input id="studentFioInput" class="input-field" type="text" placeholder="Например: Иванова Анна Сергеевна" maxlength="80" />
+          <button id="btnRegisterStudent" class="btn btn-primary" type="button">Зарегистрироваться</button>
+        </div>
+
+        <div id="studentGameBox" class="hidden">
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;">
+            <div>
+              <div id="studentNameDisplay" style="font-weight:800; font-size:1.1rem;"></div>
+              <div id="studentStatusDisplay" style="font-size:0.84rem; color:var(--muted);"></div>
+            </div>
+            <span id="studentClueCounter" class="badge-count" style="background:var(--accent-blue);">Улик: 0 / 7</span>
+          </div>
+
+          <div id="studentWaitingBanner" class="story-box" style="margin-top:16px;">
+            <strong>Ожидание старта:</strong> вы успешно зарегистрированы! Когда преподаватель нажмёт «Старт расследования», откроется бросок кубика.
+          </div>
+
+          <div id="studentActiveControls" class="hidden">
+            <div class="dice-box">
+              <div>
+                <div style="font-weight:800; font-size:0.95rem;">Бросок кубика по маршруту</div>
+                <div id="diceHint" style="font-size:0.82rem; color:var(--muted);">Бросьте кубик, чтобы продвинуться по клеткам</div>
+              </div>
+              <div id="diceFace" class="dice-face">🎲</div>
+            </div>
+            <button id="btnRollDice" class="btn btn-primary" type="button">Бросить кубик</button>
+
+            <div id="questContainer" class="quest-box hidden"></div>
+          </div>
+
+          <div id="studentFinishedBanner" class="story-box hidden" style="margin-top:16px; background:#ecfdf5; border-color:#34d399;">
+            <strong>Дело раскрыто!</strong> Вы прошли весь маршрут и собрали все 7 улик. Следите за пьедесталом на общем экране.
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      const STORAGE_KEY = "erp_detective_1c_state_v1";
+      const CHANNEL_NAME = "erp_detective_1c_channel_v1";
+      const TOTAL_CELLS = 20;
+
+      const CLUES = [
+        {
+          index: 3,
+          title: "Улика №1: Взлом контура",
+          module: "1. Архитектура и место 1С:ERP в современных корпоративных информационных системах",
+          question: "С чего начинается расследование аномалии в масштабе всего холдинга в 1С:ERP?",
+          options: [
+            "С определения, в какой функциональной подсистеме и уровне архитектуры нарушен поток данных",
+            "С ручного удаления записей из таблиц без анализа метаданных",
+            "С отключения всех регламентных заданий на сервере"
+          ],
+          correct: 0,
+          explain: "Верно! Понимание архитектуры и взаимосвязи подсистем 1С:ERP позволяет точно локализовать сбой."
+        },
+        {
+          index: 6,
+          title: "Улика №2: Фантомная сделка",
+          module: "2. Автоматизация оперативного контура: процессы продаж и закупок в 1С:ERP",
+          question: "В заказах клиентов и заявках на закупку обнаружены странные расхождения по ценам и срокам. Какой документ управляет потребностями и ходом исполнения сделки?",
+          options: [
+            "Заказ клиента / Заказ поставщику и статусы их обеспечения",
+            "Только кассовый ордер на приход наличных",
+            "Акт об инвентаризации основных средств"
+          ],
+          correct: 0,
+          explain: "Точно! Оперативный контур 1С:ERP связывает заказы, обеспечения, закупки и отгрузки."
+        },
+        {
+          index: 9,
+          title: "Улика №3: Недостача на складе",
+          module: "3. Управление складами, запасами и персоналом в 1С:ERP",
+          question: "При сверке остатков выявлено расхождение между учётным количеством и фактическим приёмкой/отгрузкой на складе. Что помогает контролировать движение по складам и ответственных лиц?",
+          options: [
+            "Складской учёт, ордерная схема документооборота и кадровые/графиковые данные персонала",
+            "Только справочник контрагентов",
+            "Настройка цветовой темы интерфейса"
+          ],
+          correct: 0,
+          explain: "Верно! Сопоставление складских операций, ордеров и работы персонала раскрывает источник расхождений."
+        },
+        {
+          index: 12,
+          title: "Улика №4: Тайна себестоимости",
+          module: "4. Управление производством и ремонтами в 1С:ERP",
+          question: "Себестоимость готовой продукции резко выросла за период. Какие процессы в 1С:ERP необходимо проверить в первую очередь?",
+          options: [
+            "Этапы производства, распределение производственных затрат и затраты на ремонты оборудования",
+            "Только список сотрудников отдела маркетинга",
+            "Настройки печати счетов-фактур"
+          ],
+          correct: 0,
+          explain: "Отлично! Производственные этапы, маршрутные/ресурсные данные и ремонты напрямую влияют на себестоимость."
+        },
+        {
+          index: 15,
+          title: "Улика №5: Сигнал на мониторе",
+          module: "5. Управление финансами и мониторинг деятельности предприятия в 1С:ERP",
+          question: "Какой инструмент помогает руководителю и аналитику оперативно увидеть отклонения по марже, рентабельности и ключевым показателям?",
+          options: [
+            "Монитор целевых показателей и финансовые отчёты анализа деятельности предприятия",
+            "Список горячих клавиш текстового редактора",
+            "Журнал регистрации входа в ОС Windows"
+          ],
+          correct: 0,
+          explain: "Верно! Мониторинг целевых показателей быстро подсвечивает проблемные точки финансов."
+        },
+        {
+          index: 18,
+          title: "Улика №6: Двойной след",
+          module: "6. Казначейство. Регламентированный и международный учёт в 1С:ERP",
+          question: "Нужно проверить движение денежных средств, корректность проводок по РСБУ и данные для международной отчётности. Какие контуры задействованы?",
+          options: [
+            "Казначейство, регламентированный учёт и подсистема международного учёта (МСФО)",
+            "Только справочник физических лиц",
+            "Исключительно настройки сетевого принтера"
+          ],
+          correct: 0,
+          explain: "Именно так! В 1С:ERP управленческий, казначейский, регламентированный и международный учёт работают согласованно."
+        },
+        {
+          index: 20,
+          title: "Улика №7: Цифровой свидетель",
+          module: "7. Искусственный интеллект и инновационные сервисы в экосистеме 1С",
+          question: "На финальном этапе расследования мы сверяем аномалии и ускоряем анализ больших массивов данных. Какую роль играют современные сервисы и ИИ в экосистеме 1С?",
+          options: [
+            "Помогают в анализе данных, автоматизации рутинных проверок и интеллектуальной поддержке решений",
+            "Полностью заменяют бухгалтерскую методологию без проверки специалистом",
+            "Используются только для генерации картинок"
+          ],
+          correct: 0,
+          explain: "Блестяще! Все 7 улик собраны, и дело о пропавшем балансе раскрыто!"
+        }
+      ];
+
+      const TOKEN_COLORS = ["#d92b2b", "#165a8a", "#0d9488", "#d97706", "#7c3aed", "#db2777", "#2563eb", "#4f46e5"];
+
+      function createInitialState() {
+        return {
+          phase: "lobby",
+          players: [],
+          logs: ["Система готова. Ожидаем регистрацию участников по QR-коду."]
+        };
+      }
+
+      function loadState() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (!raw) return createInitialState();
+          const parsed = JSON.parse(raw);
+          return {
+            phase: parsed.phase || "lobby",
+            players: Array.isArray(parsed.players) ? parsed.players : [],
+            logs: Array.isArray(parsed.logs) ? parsed.logs : []
+          };
+        } catch (e) {
+          return createInitialState();
+        }
+      }
+
+      let state = loadState();
+      let currentStudentId = sessionStorage.getItem("erp_student_id") || null;
+      const channel = "BroadcastChannel" in window ? new BroadcastChannel(CHANNEL_NAME) : null;
+
+      function saveState(broadcast = true) {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        } catch (e) {}
+        if (broadcast && channel) {
+          channel.postMessage({ type: "STATE_UPDATED", state });
+        }
+        renderAll();
+      }
+
+      function addLog(text) {
+        const time = new Date().toLocaleTimeString("ru-RU", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+        state.logs.unshift(`[${time}] ${text}`);
+        if (state.logs.length > 40) state.logs.pop();
+      }
+
+      function getInitials(fio) {
+        const parts = fio.trim().split(/\s+/).filter(Boolean);
+        if (parts.length === 0) return "?";
+        if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+        return (parts[0][0] + parts[1][0]).toUpperCase();
+      }
+
+      function getNextClue(player) {
+        return CLUES.find((c) => !player.solvedClues.includes(c.index)) || null;
+      }
+
+      function renderLobby() {
+        document.getElementById("playersCountBadge").textContent = String(state.players.length);
+        document.getElementById("btnStartGame").disabled = state.players.length === 0;
+
+        const listEl = document.getElementById("lobbyPlayersList");
+        if (state.players.length === 0) {
+          listEl.innerHTML = '<div style="color:var(--muted); font-size:0.88rem; padding:8px 0;">Ожидаем подключения студентов по QR-коду...</div>';
+          return;
+        }
+
+        listEl.innerHTML = state.players
+          .map(
+            (p) => `
+          <div class="player-chip">
+            <div class="player-chip-left">
+              <span class="token-dot" style="background:${p.color};"></span>
+              <span>${escapeHtml(p.fio)}</span>
+            </div>
+            <span style="font-size:0.76rem; color:var(--muted);">Готов</span>
+          </div>`
+          )
+          .join("");
+      }
+
+      function renderBoard() {
+        const gridEl = document.getElementById("trackGrid");
+        let html = "";
+
+        for (let i = 0; i <= TOTAL_CELLS; i++) {
+          const clue = CLUES.find((c) => c.index === i);
+          let cls = "cell";
+          let badge = `Клетка ${i}`;
+          let label = "Шаг расследования";
+
+          if (i === 0) {
+            cls += " start-cell";
+            badge = "СТАРТ";
+            label = "Кабинет бухгалтера-сыщика";
+          } else if (i === TOTAL_CELLS) {
+            cls += " finish-cell";
+            badge = "ФИНИШ";
+            label = "Улика №7 • Баланс спасён!";
+          } else if (clue) {
+            cls += " clue-cell";
+            badge = `УЛИКА ${CLUES.indexOf(clue) + 1}`;
+            label = clue.title.replace(/^Улика №\d+:\s*/, "");
+          }
+
+          const tokensHere = state.players
+            .filter((p) => p.pos === i)
+            .map(
+              (p) =>
+                `<span class="map-token" style="background:${p.color};" title="${escapeHtml(p.fio)}">${escapeHtml(getInitials(p.fio))}</span>`
+            )
+            .join("");
+
+          html += `
+            <div class="${cls}">
+              <div class="cell-top">
+                <span>${badge}</span>
+                ${clue && i !== TOTAL_CELLS ? '<span class="cell-clue-badge">1С</span>' : ""}
+              </div>
+              <div class="cell-label">${escapeHtml(label)}</div>
+              <div class="cell-tokens">${tokensHere}</div>
+            </div>`;
+        }
+        gridEl.innerHTML = html;
+
+        const progEl = document.getElementById("boardProgressList");
+        if (state.players.length === 0) {
+          progEl.innerHTML = '<div style="color:var(--muted); font-size:0.88rem;">Нет зарегистрированных участников.</div>';
+        } else {
+          progEl.innerHTML = state.players
+            .map((p) => {
+              const pct = Math.min(100, Math.round((p.pos / TOTAL_CELLS) * 100));
+              return `
+                <div class="progress-row">
+                  <div class="progress-meta">
+                    <span><span class="token-dot" style="display:inline-block; vertical-align:middle; margin-right:6px; background:${p.color};"></span>${escapeHtml(p.fio)}</span>
+                    <span>Улик: ${p.solvedClues.length}/7 • Кл. ${p.pos}/${TOTAL_CELLS}</span>
+                  </div>
+                  <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" style="width:${pct}%;"></div>
+                  </div>
+                </div>`;
+            })
+            .join("");
+        }
+
+        const logEl = document.getElementById("activityLog");
+        logEl.innerHTML = state.logs.map((line) => `<div class="log-item">${escapeHtml(line)}</div>`).join("");
+
+        const podiumSec = document.getElementById("podiumSection");
+        if (state.phase === "finished" || (state.players.length > 0 && state.players.every((p) => p.finished))) {
+          podiumSec.classList.remove("hidden");
+          renderPodium();
+        } else {
+          podiumSec.classList.add("hidden");
+        }
+      }
+
+      function renderPodium() {
+        const ranked = [...state.players].sort((a, b) => {
+          if (b.solvedClues.length !== a.solvedClues.length) return b.solvedClues.length - a.solvedClues.length;
+          if (b.pos !== a.pos) return b.pos - a.pos;
+          return (a.finishTime || Number.MAX_SAFE_INTEGER) - (b.finishTime || Number.MAX_SAFE_INTEGER);
+        });
+
+        const top3 = [ranked[1], ranked[0], ranked[2]];
+        const configs = [
+          { placeClass: "second", medal: "🥈", title: "2 место" },
+          { placeClass: "first", medal: "🥇", title: "1 место — Главный сыщик 1С:ERP" },
+          { placeClass: "third", medal: "🥉", title: "3 место" }
+        ];
+
+        document.getElementById("podiumGrid").innerHTML = top3
+          .map((player, idx) => {
+            const cfg = configs[idx];
+            if (!player) {
+              return `
+                <div class="podium-place ${cfg.placeClass}">
+                  <div class="medal">${cfg.medal}</div>
+                  <div style="font-weight:800;">${cfg.title}</div>
+                  <div style="color:var(--muted); font-size:0.88rem; margin-top:6px;">Место свободно</div>
+                </div>`;
+            }
+            return `
+              <div class="podium-place ${cfg.placeClass}">
+                <div class="medal">${cfg.medal}</div>
+                <div style="font-size:0.78rem; font-weight:800; color:var(--muted);">${cfg.title}</div>
+                <div style="font-size:1.1rem; font-weight:800; margin:6px 0;">${escapeHtml(player.fio)}</div>
+                <div style="font-size:0.86rem;">Собрано улик: <strong>${player.solvedClues.length} из 7</strong></div>
+                <div style="font-size:0.82rem; color:var(--muted);">Позиция: клетка ${player.pos} из ${TOTAL_CELLS}</div>
+              </div>`;
+          })
+          .join("");
+      }
+
+      function renderStudent() {
+        const player = state.players.find((p) => p.id === currentStudentId) || null;
+        const regBox = document.getElementById("studentRegisterBox");
+        const gameBox = document.getElementById("studentGameBox");
+
+        if (!player) {
+          regBox.classList.remove("hidden");
+          gameBox.classList.add("hidden");
+          return;
+        }
+
+        regBox.classList.add("hidden");
+        gameBox.classList.remove("hidden");
+
+        document.getElementById("studentNameDisplay").textContent = player.fio;
+        document.getElementById("studentStatusDisplay").textContent = `Клетка ${player.pos} из ${TOTAL_CELLS}`;
+        document.getElementById("studentClueCounter").textContent = `Улик: ${player.solvedClues.length} / 7`;
+
+        const waitEl = document.getElementById("studentWaitingBanner");
+        const activeEl = document.getElementById("studentActiveControls");
+        const finEl = document.getElementById("studentFinishedBanner");
+
+        if (state.phase === "lobby") {
+          waitEl.classList.remove("hidden");
+          activeEl.classList.add("hidden");
+          finEl.classList.add("hidden");
+          return;
+        }
+
+        waitEl.classList.add("hidden");
+
+        if (player.finished || player.solvedClues.length === CLUES.length) {
+          activeEl.classList.add("hidden");
+          finEl.classList.remove("hidden");
+          return;
+        }
+
+        finEl.classList.add("hidden");
+        activeEl.classList.remove("hidden");
+
+        const pendingClue = getNextClue(player);
+        const rollBtn = document.getElementById("btnRollDice");
+        const questBox = document.getElementById("questContainer");
+        const diceHint = document.getElementById("diceHint");
+
+        if (pendingClue && player.pos >= pendingClue.index) {
+          rollBtn.disabled = true;
+          diceHint.textContent = "Сначала разберитесь с текущей уликой ниже";
+          questBox.classList.remove("hidden");
+          renderQuest(player, pendingClue);
+        } else {
+          rollBtn.disabled = false;
+          diceHint.textContent = "Бросьте кубик (1–4), чтобы продвинуться к следующей улике";
+          questBox.classList.add("hidden");
+        }
+      }
+
+      function renderQuest(player, clue) {
+        const questBox = document.getElementById("questContainer");
+        questBox.innerHTML = `
+          <div class="quest-module-tag">${escapeHtml(clue.module)}</div>
+          <h3 style="font-size:1.1rem; margin-bottom:8px;">${escapeHtml(clue.title)}</h3>
+          <p style="font-size:0.95rem; margin-bottom:10px;">${escapeHtml(clue.question)}</p>
+          <div>
+            ${clue.options
+              .map(
+                (opt, idx) =>
+                  `<button class="option-btn" type="button" data-opt="${idx}">${escapeHtml(opt)}</button>`
+              )
+              .join("")}
+          </div>
+          <div id="questFeedback" class="feedback-msg hidden"></div>
+        `;
+
+        questBox.querySelectorAll(".option-btn").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const chosen = Number(btn.getAttribute("data-opt"));
+            const fb = document.getElementById("questFeedback");
+            fb.classList.remove("hidden");
+
+            if (chosen === clue.correct) {
+              fb.className = "feedback-msg feedback-ok";
+              fb.textContent = clue.explain;
+
+              if (!player.solvedClues.includes(clue.index)) {
+                player.solvedClues.push(clue.index);
+              }
+              if (player.solvedClues.length === CLUES.length) {
+                player.pos = TOTAL_CELLS;
+                player.finished = true;
+                player.finishTime = Date.now();
+                addLog(`${player.fio} собрал(а) все 7 улик и раскрыл(а) дело!`);
+              } else {
+                addLog(`${player.fio} раскрыл(а): ${clue.title} (${player.solvedClues.length}/7).`);
+              }
+
+              setTimeout(() => {
+                saveState(true);
+              }, 650);
+            } else {
+              fb.className = "feedback-msg feedback-err";
+              fb.textContent = "След не сошёлся! Перечитайте условие и выберите другой вариант.";
+            }
+          });
+        });
+      }
+
+      const isStudentMode = new URLSearchParams(window.location.search).get("role") === "student";
+
+      function renderAll() {
+        if (isStudentMode) {
+          document.getElementById("viewLobby").classList.add("hidden");
+          document.getElementById("viewBoard").classList.add("hidden");
+          document.getElementById("viewStudent").classList.remove("hidden");
+          renderStudent();
+        } else {
+          document.getElementById("viewStudent").classList.add("hidden");
+          if (state.phase === "lobby") {
+            document.getElementById("viewLobby").classList.remove("hidden");
+            document.getElementById("viewBoard").classList.add("hidden");
+            renderLobby();
+          } else {
+            document.getElementById("viewLobby").classList.add("hidden");
+            document.getElementById("viewBoard").classList.remove("hidden");
+            renderBoard();
+          }
+        }
+      }
+
+      function escapeHtml(str) {
+        return String(str)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
+
+      document.getElementById("btnAddDemo").addEventListener("click", () => {
+        const demoNames = ["Соколова Мария", "Волков Артём", "Козлова Дарья", "Морозов Павел"];
+        let added = 0;
+        for (const name of demoNames) {
+          if (!state.players.some((p) => p.fio === name)) {
+            state.players.push({
+              id: "p_" + Math.random().toString(36).slice(2, 9),
+              fio: name,
+              color: TOKEN_COLORS[state.players.length % TOKEN_COLORS.length],
+              pos: 0,
+              solvedClues: [],
+              finished: false,
+              finishTime: null
+            });
+            addLog(`Зарегистрирован участник: ${name}`);
+            added++;
+          }
+        }
+        if (added > 0) saveState(true);
+      });
+
+      document.getElementById("btnStartGame").addEventListener("click", () => {
+        if (state.players.length === 0) return;
+        state.phase = "playing";
+        addLog("Преподаватель запустил расследование! Игроки могут бросать кубик.");
+        saveState(true);
+      });
+
+      document.getElementById("btnFinishDemo").addEventListener("click", () => {
+        state.phase = "finished";
+        addLog("Подведены итоги: открыт пьедестал победителей.");
+        saveState(true);
+      });
+
+      document.getElementById("btnResetGame").addEventListener("click", () => {
+        state = createInitialState();
+        currentStudentId = null;
+        sessionStorage.removeItem("erp_student_id");
+        saveState(true);
+      });
+
+      document.getElementById("btnRegisterStudent").addEventListener("click", () => {
+        const input = document.getElementById("studentFioInput");
+        const fio = input.value.trim().replace(/\s+/g, " ");
+        if (fio.length < 3) {
+          alert("Пожалуйста, введите ваши ФИО.");
+          return;
+        }
+
+        const existing = state.players.find((p) => p.fio.toLowerCase() === fio.toLowerCase());
+        if (existing) {
+          currentStudentId = existing.id;
+          sessionStorage.setItem("erp_student_id", existing.id);
+          renderAll();
+          return;
+        }
+
+        const newPlayer = {
+          id: "p_" + Math.random().toString(36).slice(2, 9),
+          fio,
+          color: TOKEN_COLORS[state.players.length % TOKEN_COLORS.length],
+          pos: 0,
+          solvedClues: [],
+          finished: false,
+          finishTime: null
+        };
+
+        state.players.push(newPlayer);
+        currentStudentId = newPlayer.id;
+        sessionStorage.setItem("erp_student_id", newPlayer.id);
+        addLog(`Подключился студент: ${fio}`);
+        input.value = "";
+        saveState(true);
+      });
+
+      document.getElementById("btnRollDice").addEventListener("click", () => {
+        const player = state.players.find((p) => p.id === currentStudentId);
+        if (!player || state.phase === "lobby" || player.finished) return;
+
+        const roll = Math.floor(Math.random() * 4) + 1;
+        const diceFace = document.getElementById("diceFace");
+        diceFace.textContent = String(roll);
+
+        const nextClue = getNextClue(player);
+        let targetPos = Math.min(TOTAL_CELLS, player.pos + roll);
+
+        if (nextClue && player.pos < nextClue.index && targetPos > nextClue.index) {
+          targetPos = nextClue.index;
+        }
+
+        player.pos = targetPos;
+        addLog(`${player.fio} выбросил(а) ${roll} и перешёл(ла) на клетку ${player.pos}.`);
+        saveState(true);
+      });
+
+      if (channel) {
+        channel.onmessage = (ev) => {
+          if (ev.data && ev.data.type === "STATE_UPDATED" && ev.data.state) {
+            state = ev.data.state;
+            renderAll();
+          }
+        };
+      }
+
+      window.addEventListener("storage", (ev) => {
+        if (ev.key === STORAGE_KEY && ev.newValue) {
+          state = loadState();
+          renderAll();
+        }
+      });
+
+      renderAll();
+    })();
+  </script>
+</body>
+</html>
