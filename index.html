@@ -570,6 +570,163 @@
       color: var(--muted);
       margin-top: 10px;
     }
+
+    .preface-toggle-btn {
+      display: none;
+      width: 100%;
+      text-align: left;
+      background: #fffdf5;
+      border: 1px solid #f3d66b;
+      border-radius: 10px;
+      padding: 8px 12px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--accent-blue);
+      cursor: pointer;
+      margin-bottom: 8px;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        background-attachment: scroll;
+      }
+
+      .topbar {
+        padding: 8px 12px;
+        gap: 6px;
+      }
+
+      .brand-group {
+        gap: 8px;
+      }
+
+      .emblem-img {
+        width: 32px;
+        height: 36px;
+      }
+
+      .brand-title {
+        font-size: 0.85rem;
+      }
+
+      .brand-sub {
+        display: none;
+      }
+
+      .hud-group {
+        gap: 6px;
+      }
+
+      .hud-pill {
+        padding: 3px 8px;
+        font-size: 0.74rem;
+      }
+
+      #hudPlayer {
+        max-width: 150px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .container {
+        padding: 10px;
+      }
+
+      .panel-story,
+      .panel-join,
+      .stage-card {
+        padding: 14px;
+        border-radius: 14px;
+      }
+
+      h1.game-title {
+        font-size: 1.45rem;
+        margin-bottom: 10px;
+      }
+
+      .stage-top-bar {
+        gap: 6px;
+        margin-bottom: 8px;
+      }
+
+      .stage-badge,
+      .q-counter,
+      .lives-badge {
+        font-size: 0.74rem;
+        padding: 3px 9px;
+      }
+
+      .stage-title {
+        font-size: 1.08rem;
+        margin-bottom: 8px;
+      }
+
+      .preface-toggle-btn {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .preface-box {
+        padding: 10px 12px;
+        margin-bottom: 10px;
+        font-size: 0.84rem;
+      }
+
+      .preface-box.mobile-collapsed {
+        display: none;
+      }
+
+      .preface-topic {
+        font-size: 0.78rem;
+        margin-bottom: 4px;
+      }
+
+      .subsystem-tag {
+        margin-top: 5px;
+        font-size: 0.76rem;
+      }
+
+      .question-block {
+        padding: 12px;
+        border-radius: 12px;
+      }
+
+      .gap-pill {
+        font-size: 0.72rem;
+        padding: 2px 8px;
+        margin-bottom: 6px;
+      }
+
+      .question-text {
+        font-size: 0.94rem;
+        line-height: 1.38;
+        margin-bottom: 8px;
+      }
+
+      .option-btn {
+        padding: 9px 11px;
+        font-size: 0.85rem;
+        line-height: 1.35;
+        margin-top: 6px;
+        border-radius: 9px;
+      }
+
+      .feedback-msg {
+        margin-top: 10px;
+        padding: 9px 11px;
+        font-size: 0.84rem;
+        line-height: 1.35;
+      }
+
+      .btn {
+        padding: 10px 14px;
+        font-size: 0.9rem;
+        border-radius: 10px;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -605,7 +762,7 @@
           </div>
 
           <div class="rules-alert">
-            <strong>Сюжетный протокол следствия (3 ошибки и античит):</strong>
+            <strong>Сюжетный протокол следствия (3 ошибки и антимошенник):</strong>
             <br />• У детектива есть право всего на <strong>3 неверные версии (ошибки)</strong> за одно расследование. Если допустить <strong>3 ошибки</strong>, главный аудитор заподозрит халатность, <strong>архив дела опечатают, а следственные материалы аннулируют</strong> — придётся вернуться на старт и начать квест заново.
             <br />• Во время активного расследования запрещено сворачивать окно или переключаться на другие вкладки (поиск в ИИ и интернете фиксируется как нарушение: появится предупреждение «Мошенник!», а попытка будет сброшена на начало).
           </div>
@@ -689,7 +846,11 @@
 
         <h2 id="stageTitle" class="stage-title"></h2>
 
-        <div class="preface-box">
+        <button id="btnTogglePreface" class="preface-toggle-btn" type="button" aria-expanded="false">
+          <span>Сюжет и подсистемы этапа</span>
+          <span id="prefaceToggleArrow">▾</span>
+        </button>
+        <div id="prefaceBox" class="preface-box mobile-collapsed">
           <div id="stageTopic" class="preface-topic"></div>
           <p id="stagePreface"></p>
           <div id="stageSubsystems" class="subsystem-tag"></div>
@@ -1387,7 +1548,34 @@
         lastStatusBanner = "";
         lastStatusType = "normal";
         closeModal();
-        updateHud();
+  
+      const btnTogglePreface = document.getElementById("btnTogglePreface");
+      const prefaceBox = document.getElementById("prefaceBox");
+      const prefaceToggleArrow = document.getElementById("prefaceToggleArrow");
+
+      function syncPrefaceStateForViewport() {
+        const isMobile = window.innerWidth <= 768;
+        if (!isMobile) {
+          prefaceBox.classList.remove("mobile-collapsed");
+          btnTogglePreface.setAttribute("aria-expanded", "true");
+        } else {
+          prefaceBox.classList.add("mobile-collapsed");
+          btnTogglePreface.setAttribute("aria-expanded", "false");
+          prefaceToggleArrow.textContent = "▾";
+        }
+      }
+
+      btnTogglePreface.addEventListener("click", () => {
+        const willExpand = prefaceBox.classList.contains("mobile-collapsed");
+        prefaceBox.classList.toggle("mobile-collapsed", !willExpand);
+        btnTogglePreface.setAttribute("aria-expanded", String(willExpand));
+        prefaceToggleArrow.textContent = willExpand ? "▴" : "▾";
+      });
+
+      window.addEventListener("resize", syncPrefaceStateForViewport);
+
+      syncPrefaceStateForViewport();
+      updateHud();
         sendToGoogleSheets("register");
       }
 
@@ -1458,7 +1646,11 @@
         const nextWrap = document.getElementById("nextQuestionWrap");
         nextWrap.classList.add("hidden");
 
+        syncPrefaceStateForViewport();
         updateHud();
+        if (window.innerWidth <= 768) {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
 
         const shuffledOptions = shuffleArray(
           qItem.options.map((opt, idx) => ({
@@ -1687,3 +1879,4 @@
   </script>
 </body>
 </html>
+
