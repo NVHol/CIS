@@ -14,7 +14,7 @@
       --accent-red: #d92b2b;
       --accent-blue: #165a8a;
       --accent-green: #15803d;
-      --card-bg: rgba(255, 255, 255, 0.94);
+      --card-bg: rgba(255, 255, 255, 0.95);
       --border: #dfe4ec;
       --shadow: 0 12px 32px rgba(24, 34, 48, 0.08);
     }
@@ -45,7 +45,7 @@
       justify-content: space-between;
       gap: 12px;
       padding: 12px 24px;
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255, 255, 255, 0.96);
       border-bottom: 2px solid var(--accent-yellow);
       position: sticky;
       top: 0;
@@ -76,6 +76,29 @@
     .brand-sub {
       font-size: 0.8rem;
       color: var(--muted);
+    }
+
+    .hud-group {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .hud-pill {
+      background: #f8fafc;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 999px;
+      padding: 5px 13px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .hud-pill.danger {
+      background: #fef2f2;
+      border-color: #fca5a5;
+      color: #991b1b;
     }
 
     .container {
@@ -115,7 +138,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap: 20px;
+      gap: 18px;
     }
 
     .tag-1c {
@@ -151,6 +174,20 @@
       margin-top: 10px;
     }
 
+    .rules-alert {
+      margin-top: 14px;
+      background: #fff5f5;
+      border: 1.5px solid #fecaca;
+      border-left: 4px solid var(--accent-red);
+      border-radius: 12px;
+      padding: 14px 16px;
+      font-size: 0.92rem;
+    }
+
+    .rules-alert strong {
+      color: #991b1b;
+    }
+
     .qr-block {
       display: flex;
       flex-direction: column;
@@ -159,15 +196,15 @@
       background: #fff;
       border: 2px solid var(--accent-yellow);
       border-radius: 16px;
-      padding: 20px;
+      padding: 18px;
     }
 
     .qr-img {
-      width: 176px;
-      height: 176px;
+      width: 160px;
+      height: 160px;
       object-fit: contain;
       border-radius: 10px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .reg-status {
@@ -183,6 +220,13 @@
       background: #ecfdf5;
       border-color: #86efac;
       color: #166534;
+      font-weight: 600;
+    }
+
+    .reg-status.fail-banner {
+      background: #fef2f2;
+      border-color: #fca5a5;
+      color: #991b1b;
       font-weight: 600;
     }
 
@@ -240,11 +284,11 @@
       flex-wrap: wrap;
     }
 
-    /* Модальное окно регистрации */
+    /* Модальные окна */
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(15, 23, 42, 0.55);
+      background: rgba(15, 23, 42, 0.62);
       backdrop-filter: blur(4px);
       display: flex;
       align-items: center;
@@ -255,12 +299,17 @@
 
     .modal-card {
       width: 100%;
-      max-width: 440px;
+      max-width: 480px;
       background: #fff;
       border: 1px solid var(--border);
       border-radius: 20px;
       padding: 24px 26px;
-      box-shadow: 0 20px 50px rgba(15, 23, 42, 0.25);
+      box-shadow: 0 20px 50px rgba(15, 23, 42, 0.28);
+    }
+
+    .modal-card.cheat-card {
+      border: 3px solid var(--accent-red);
+      background: #fffafa;
     }
 
     .modal-header {
@@ -304,7 +353,7 @@
 
     /* Экран этапа */
     .stage-card {
-      max-width: 840px;
+      max-width: 860px;
       margin: 0 auto;
     }
 
@@ -331,6 +380,16 @@
       border: 1px solid #eab308;
       color: var(--ink);
       font-weight: 700;
+      font-size: 0.84rem;
+      padding: 4px 12px;
+      border-radius: 999px;
+    }
+
+    .lives-badge {
+      background: #fef2f2;
+      border: 1.5px solid #fca5a5;
+      color: #991b1b;
+      font-weight: 800;
       font-size: 0.84rem;
       padding: 4px 12px;
       border-radius: 999px;
@@ -411,7 +470,7 @@
 
     .option-btn:disabled {
       cursor: default;
-      opacity: 0.85;
+      opacity: 0.65;
     }
 
     .feedback-msg {
@@ -477,6 +536,40 @@
       color: #14532d;
       margin-bottom: 16px;
     }
+
+    .summary-table-wrap {
+      margin-top: 16px;
+      overflow-x: auto;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px;
+    }
+
+    table.stats-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+
+    table.stats-table th,
+    table.stats-table td {
+      border-bottom: 1px solid #e2e8f0;
+      padding: 8px 10px;
+      text-align: left;
+    }
+
+    table.stats-table th {
+      background: #f8fafc;
+      font-weight: 800;
+      color: var(--accent-blue);
+    }
+
+    .sync-note {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
@@ -488,6 +581,13 @@
         <div class="brand-sub">Интерактивная игра «Дело о пропавшем балансе: 7 улик в 1С:ERP»</div>
       </div>
     </div>
+
+    <div class="hud-group">
+      <span id="hudPlayer" class="hud-pill">Игрок: не зарегистрирован</span>
+      <span id="hudErrors" class="hud-pill danger">Ошибок: 0 / 3</span>
+      <span id="hudAttempts" class="hud-pill">Запусков: 0</span>
+      <span id="hudCheats" class="hud-pill">Нарушений: 0</span>
+    </div>
   </header>
 
   <main class="container">
@@ -495,13 +595,19 @@
     <section id="viewStart">
       <div class="lobby-grid">
         <div class="panel-story">
-          <div class="tag-1c">1С:ERP • 7 ЭТАПОВ И УЛИК • ПОИСК РАЗРЫВОВ В ПОДСИСТЕМАХ</div>
+          <div class="tag-1c">1С:ERP • 7 ЭТАПОВ И УЛИК • ЛИМИТ: 3 ОШИБКИ • АНТИЧИТ</div>
           <h1 class="game-title">Дело о пропавшем балансе</h1>
 
           <div class="story-box">
             <p><strong>Предыстория:</strong> Ты — штатный бухгалтер крупного холдинга, который по ночам зачитывается детективами и давно мечтает о настоящем расследовании. И вот твой звёздный час настал!</p>
             <p>За день до годового аудита в корпоративной базе 1С:ERP начинают происходить странные вещи: в отчётах всплывают загадочные расхождения, исчезает маржа, зависают платежи, а сигналы тревоги то появляются, то маскируются. Чтобы раскрыть это дело, не нужны лупа и плащ — достаточно проверить работу подсистем и найти информационные разрывы.</p>
             <p>Тебя ждёт маршрут из 7 этапов по контурам 1С:ERP — от архитектуры и НСИ до казначейства и ИИ в 1С. На каждом этапе детектив проверяет стыки подсистем, отвечает на 5 вопросов о разрывах и открывает улику или зацепку, чтобы в финале свести картину воедино и раскрыть дело.</p>
+          </div>
+
+          <div class="rules-alert">
+            <strong>Сюжетный протокол следствия (3 ошибки и античит):</strong>
+            <br />• У детектива есть право всего на <strong>3 неверные версии (ошибки)</strong> за одно расследование. Если допустить <strong>3 ошибки</strong>, главный аудитор заподозрит халатность, <strong>архив дела опечатают, а следственные материалы аннулируют</strong> — придётся вернуться на старт и начать квест заново.
+            <br />• Во время активного расследования запрещено сворачивать окно или переключаться на другие вкладки (поиск в ИИ и интернете фиксируется как нарушение: появится предупреждение «Мошенник!», а попытка будет сброшена на начало).
           </div>
         </div>
 
@@ -517,7 +623,7 @@
 
           <div class="actions-row">
             <button id="btnOpenRegisterModal" class="btn btn-secondary" type="button" style="flex:1;">Зарегистрироваться</button>
-            <button id="btnStartInvestigation" class="btn btn-primary" type="button" style="flex:1.25;" disabled>Старт расследования</button>
+            <button id="btnStartInvestigation" class="btn btn-primary" type="button" style="flex:1.25;" disabled>Начать квест заново</button>
           </div>
         </div>
       </div>
@@ -527,7 +633,7 @@
     <div id="registerModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="registerModalTitle">
       <div class="modal-card">
         <div class="modal-header">
-          <h2 id="registerModalTitle" style="font-size:1.3rem;">Регистрация</h2>
+          <h2 id="registerModalTitle" style="font-size:1.3rem;">Регистрация детектива</h2>
           <button id="btnCloseRegisterModal" class="modal-close" type="button" aria-label="Закрыть">&times;</button>
         </div>
         <p style="font-size:0.9rem; color:var(--muted);">Введите ваши ФИО и нажмите «Зарегистрироваться».</p>
@@ -540,12 +646,45 @@
       </div>
     </div>
 
+    <!-- ==================== МОДАЛЬНОЕ ОКНО: 3 ОШИБКИ (ПРОВАЛ ПОПЫТКИ) ==================== -->
+    <div id="fail3Modal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="fail3Title">
+      <div class="modal-card cheat-card">
+        <div class="modal-header">
+          <h2 id="fail3Title" style="font-size:1.3rem; color:var(--accent-red);">3 ошибки — архив дела опечатан!</h2>
+        </div>
+        <p style="margin-bottom:10px; font-weight:600;">
+          Сюжетный поворот: после третьей ошибочной версии в отчётности главного аудитора возникли критические расхождения. Служба внутреннего контроля сочла гипотезу неподтверждённой, <strong>опечатала текущую папку расследования и аннулировала прогресс текущей попытки</strong>.
+        </p>
+        <p style="margin-bottom:16px; color:var(--muted); font-size:0.92rem;">
+          Вернитесь на стартовую страницу и начните квест заново — шаг за шагом, пока не дойдёте до конца.
+        </p>
+        <button id="btnFailReturnStart" class="btn btn-primary" type="button">Вернуться на старт и начать квест заново</button>
+      </div>
+    </div>
+
+    <!-- ==================== МОДАЛЬНОЕ ОКНО АНТИЧИТА: «МОШЕННИК!» ==================== -->
+    <div id="cheatModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="cheatTitle">
+      <div class="modal-card cheat-card">
+        <div class="modal-header">
+          <h2 id="cheatTitle" style="font-size:1.35rem; color:var(--accent-red);">Мошенник! Попытка обнулена!</h2>
+        </div>
+        <p style="margin-bottom:10px; font-weight:700;">
+          Вы свернули окно с заданием или переключились на другую вкладку во время прохождения квеста!
+        </p>
+        <p style="margin-bottom:16px; font-size:0.93rem; color:var(--muted);">
+          Поиск подсказок в интернете и ИИ нарушает правила следствия. Факт нарушения зафиксирован, текущая попытка прервана, а игра начинается заново со стартовой страницы.
+        </p>
+        <button id="btnCheatRestart" class="btn btn-primary" type="button">Понятно — начать квест заново</button>
+      </div>
+    </div>
+
     <!-- ==================== ЭКРАН ПРОХОЖДЕНИЯ ЭТАПА ==================== -->
     <section id="viewStage" class="hidden">
       <div class="stage-card">
         <div class="stage-top-bar">
           <span id="stageBadge" class="stage-badge">Этап 1 из 7</span>
           <span id="questionCounter" class="q-counter">Вопрос 1 из 5</span>
+          <span id="stageLivesBadge" class="lives-badge">Осталось ошибок до провала: 3</span>
         </div>
 
         <h2 id="stageTitle" class="stage-title"></h2>
@@ -579,7 +718,27 @@
           <p id="finalPlotTwist" style="margin-bottom:12px;"></p>
           <ul id="finalVerdictList" class="final-verdict-list"></ul>
           <div id="finalClosingLine" class="closing-banner"></div>
-          <button id="btnRestartGame" class="btn btn-secondary" type="button">Начать расследование заново</button>
+
+          <div class="summary-table-wrap">
+            <div style="font-weight:800; margin-bottom:8px; color:var(--accent-blue);">Итоговые показатели для журнала и Google Sheets:</div>
+            <table class="stats-table">
+              <thead>
+                <tr>
+                  <th>ФИО</th>
+                  <th>Пройден</th>
+                  <th>Ошибок (в попытке / всего)</th>
+                  <th>Начинал квест (раз)</th>
+                  <th>Был мошенником (раз)</th>
+                </tr>
+              </thead>
+              <tbody id="finalStatsBody"></tbody>
+            </table>
+            <div id="sheetSyncStatus" class="sync-note"></div>
+          </div>
+
+          <div style="margin-top:16px;">
+            <button id="btnRestartGame" class="btn btn-secondary" type="button">Начать расследование заново</button>
+          </div>
         </div>
       </div>
     </section>
@@ -587,6 +746,12 @@
 
   <script>
     (function () {
+      // Вставьте сюда URL развёрнутого веб-приложения Google Apps Script (Web App URL)
+      // Пример: "https://script.google.com/macros/s/AKfycb.../exec"
+      const GOOGLE_SHEETS_WEBAPP_URL = "";
+      const MAX_ERRORS = 3;
+      const STORAGE_KEY = "bgut_1c_erp_quest_tracker_v1";
+
       const FINAL_RESOLUTION = {
         title: "Финальная развязка дела: «Эффект домино в едином контуре»",
         plotTwist: "Когда детектив раскладывает на столе все 5 улик и 2 зацепки, выясняется главное: в холдинге не было злонамеренного «диверсанта», который сломал базу одним ударом. Вместо этого сработал «эффект домино» информационных разрывов: несогласованные правила продаж и закупок потянули за собой сбои в графиках производства, заменах материалов и ремонтах; складские расхождения и кадрово-расчётные нестыковки исказили затраты и остатки; кассовые разрывы в казначействе ударили по ликвидности; а прогнозы и автоматизация на базе ИИ подхватили «грязные» данные и выдали искажённый сигнал на мониторе руководителя.",
@@ -1057,17 +1222,130 @@
         }
       ];
 
+      function loadTrackerDb() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          return raw ? JSON.parse(raw) : {};
+        } catch (e) {
+          return {};
+        }
+      }
+
+      function saveTrackerDb(db) {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(db));
+        } catch (e) {}
+      }
+
+      let trackerDb = loadTrackerDb();
+
+      function getStudentRecord(fio) {
+        if (!fio) return null;
+        if (!trackerDb[fio]) {
+          trackerDb[fio] = {
+            fio: fio,
+            completed: false,
+            completedAt: "",
+            totalErrors: 0,
+            attempts: 0,
+            cheatCount: 0,
+            lastEvent: "registered"
+          };
+          saveTrackerDb(trackerDb);
+        }
+        return trackerDb[fio];
+      }
+
       let registeredFio = "";
+      let isActiveRun = false;
       let currentStageIdx = 0;
       let currentQuestionIdx = 0;
+      let runErrors = 0;
       let questionAnsweredCorrectly = false;
+      let lastStatusBanner = "";
+      let lastStatusType = "normal";
 
       const viewStart = document.getElementById("viewStart");
       const viewStage = document.getElementById("viewStage");
       const registerModal = document.getElementById("registerModal");
+      const fail3Modal = document.getElementById("fail3Modal");
+      const cheatModal = document.getElementById("cheatModal");
       const studentFioInput = document.getElementById("studentFioInput");
       const btnStartInvestigation = document.getElementById("btnStartInvestigation");
       const regStatusBox = document.getElementById("regStatusBox");
+
+      function sendToGoogleSheets(eventName) {
+        const rec = registeredFio ? getStudentRecord(registeredFio) : null;
+        const payload = {
+          timestamp: new Date().toISOString(),
+          event: eventName,
+          fio: registeredFio || "Не указано",
+          passed: rec && rec.completed ? "Да" : "Нет",
+          runErrors: runErrors,
+          totalErrors: rec ? rec.totalErrors : 0,
+          attempts: rec ? rec.attempts : 0,
+          cheaterCount: rec ? rec.cheatCount : 0,
+          stage: currentStageIdx + 1,
+          question: currentQuestionIdx + 1
+        };
+
+        const statusEl = document.getElementById("sheetSyncStatus");
+        if (!GOOGLE_SHEETS_WEBAPP_URL) {
+          if (statusEl) {
+            statusEl.textContent =
+              "Google Sheets Web App URL пока не задан в коде (GOOGLE_SHEETS_WEBAPP_URL). Данные зафиксированы локально и готовы к отправке после вставки ссылки скрипта.";
+          }
+          return;
+        }
+
+        fetch(GOOGLE_SHEETS_WEBAPP_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        })
+          .then(() => {
+            if (statusEl) {
+              statusEl.textContent = "Данные отправлены в Google Таблицу.";
+            }
+          })
+          .catch(() => {
+            if (statusEl) {
+              statusEl.textContent = "Не удалось отправить данные в Google Таблицу (проверьте сеть/URL).";
+            }
+          });
+      }
+
+      function updateHud() {
+        const rec = registeredFio ? getStudentRecord(registeredFio) : null;
+        document.getElementById("hudPlayer").textContent = registeredFio
+          ? `Игрок: ${registeredFio}`
+          : "Игрок: не зарегистрирован";
+        document.getElementById("hudErrors").textContent = `Ошибок: ${runErrors} / ${MAX_ERRORS}`;
+        document.getElementById("hudAttempts").textContent = `Начинал: ${rec ? rec.attempts : 0}`;
+        document.getElementById("hudCheats").textContent = `Мошенник: ${rec ? rec.cheatCount : 0}`;
+
+        const livesLeft = Math.max(0, MAX_ERRORS - runErrors);
+        const stageLivesBadge = document.getElementById("stageLivesBadge");
+        if (stageLivesBadge) {
+          stageLivesBadge.textContent = `Ошибок: ${runErrors} из ${MAX_ERRORS} (осталось: ${livesLeft})`;
+        }
+
+        if (registeredFio) {
+          btnStartInvestigation.disabled = false;
+          btnStartInvestigation.textContent =
+            rec && rec.attempts > 0 ? "Начать квест заново" : "Начать квест";
+
+          regStatusBox.classList.remove("ready", "fail-banner");
+          if (lastStatusBanner) {
+            regStatusBox.classList.add(lastStatusType === "fail" ? "fail-banner" : "ready");
+            regStatusBox.textContent = lastStatusBanner;
+          } else {
+            regStatusBox.classList.add("ready");
+            regStatusBox.textContent = `Зарегистрирован: ${registeredFio}. Нажмите «${btnStartInvestigation.textContent}».`;
+          }
+        }
+      }
 
       function shuffleArray(arr) {
         const copy = arr.slice();
@@ -1105,10 +1383,53 @@
           return;
         }
         registeredFio = fio;
-        btnStartInvestigation.disabled = false;
-        regStatusBox.classList.add("ready");
-        regStatusBox.textContent = `Регистрация выполнена: ${fio}. Нажмите «Старт расследования», чтобы начать.`;
+        getStudentRecord(fio);
+        lastStatusBanner = "";
+        lastStatusType = "normal";
         closeModal();
+        updateHud();
+        sendToGoogleSheets("register");
+      }
+
+      function returnToStartScreen(message, isFail) {
+        isActiveRun = false;
+        currentStageIdx = 0;
+        currentQuestionIdx = 0;
+        runErrors = 0;
+        questionAnsweredCorrectly = false;
+        lastStatusBanner = message || "";
+        lastStatusType = isFail ? "fail" : "normal";
+
+        viewStage.classList.add("hidden");
+        viewStart.classList.remove("hidden");
+        updateHud();
+      }
+
+      function triggerThreeErrorsFailure() {
+        const rec = getStudentRecord(registeredFio);
+        rec.lastEvent = "failed_3_errors";
+        saveTrackerDb(trackerDb);
+        isActiveRun = false;
+        sendToGoogleSheets("failed_3_errors");
+        fail3Modal.classList.remove("hidden");
+      }
+
+      function triggerCheaterPenalty() {
+        if (!isActiveRun || !registeredFio) return;
+        const rec = getStudentRecord(registeredFio);
+        rec.cheatCount += 1;
+        rec.lastEvent = "cheater_tab_switch";
+        saveTrackerDb(trackerDb);
+
+        isActiveRun = false;
+        currentStageIdx = 0;
+        currentQuestionIdx = 0;
+        runErrors = 0;
+        questionAnsweredCorrectly = false;
+
+        sendToGoogleSheets("cheater_tab_switch");
+        updateHud();
+        cheatModal.classList.remove("hidden");
       }
 
       function renderQuestion() {
@@ -1137,6 +1458,8 @@
         const nextWrap = document.getElementById("nextQuestionWrap");
         nextWrap.classList.add("hidden");
 
+        updateHud();
+
         const shuffledOptions = shuffleArray(
           qItem.options.map((opt, idx) => ({
             text: opt,
@@ -1154,7 +1477,7 @@
 
         optionsList.querySelectorAll(".option-btn").forEach((btn) => {
           btn.addEventListener("click", () => {
-            if (questionAnsweredCorrectly) return;
+            if (questionAnsweredCorrectly || !isActiveRun) return;
             const isChosenCorrect = btn.getAttribute("data-correct") === "1";
             feedbackBox.classList.remove("hidden");
 
@@ -1172,14 +1495,53 @@
               nextBtn.textContent = isLastQuestion ? `Открыть: ${stage.clueCode}` : "Следующий вопрос";
               nextWrap.classList.remove("hidden");
             } else {
-              feedbackBox.className = "feedback-msg feedback-err";
-              feedbackBox.textContent = "Разрыв пока не найден. Попробуйте выбрать другой вариант.";
+              runErrors += 1;
+              const rec = getStudentRecord(registeredFio);
+              rec.totalErrors += 1;
+              rec.lastEvent = "wrong_answer";
+              saveTrackerDb(trackerDb);
+
+              btn.disabled = true;
+              updateHud();
+
+              if (runErrors >= MAX_ERRORS) {
+                feedbackBox.className = "feedback-msg feedback-err";
+                feedbackBox.textContent = `Ошибка ${runErrors} из ${MAX_ERRORS}! Лимит ошибок исчерпан — архив дела опечатан.`;
+                setTimeout(() => {
+                  triggerThreeErrorsFailure();
+                }, 450);
+              } else {
+                const left = MAX_ERRORS - runErrors;
+                feedbackBox.className = "feedback-msg feedback-err";
+                feedbackBox.textContent = `Неверная версия! Это ошибка ${runErrors} из ${MAX_ERRORS} (осталось ошибок до провала: ${left}). Выберите другой вариант.`;
+              }
             }
           });
         });
       }
 
+      function renderFinalStatsTable() {
+        const rec = getStudentRecord(registeredFio);
+        const tbody = document.getElementById("finalStatsBody");
+        tbody.innerHTML = `
+          <tr>
+            <td>${escapeHtml(rec.fio)}</td>
+            <td>Да</td>
+            <td>${runErrors} / ${rec.totalErrors}</td>
+            <td>${rec.attempts}</td>
+            <td>${rec.cheatCount}</td>
+          </tr>
+        `;
+      }
+
       function renderFinalResolution() {
+        isActiveRun = false;
+        const rec = getStudentRecord(registeredFio);
+        rec.completed = true;
+        rec.completedAt = new Date().toISOString();
+        rec.lastEvent = "completed_quest";
+        saveTrackerDb(trackerDb);
+
         document.getElementById("questionArea").classList.add("hidden");
         document.getElementById("clueFoundBox").classList.add("hidden");
 
@@ -1193,6 +1555,10 @@
           .join("");
         document.getElementById("finalClosingLine").textContent =
           (registeredFio ? `${registeredFio} — ` : "") + FINAL_RESOLUTION.closingLine;
+
+        renderFinalStatsTable();
+        updateHud();
+        sendToGoogleSheets("completed_quest");
       }
 
       function showClueFound() {
@@ -1214,20 +1580,49 @@
 
       function startGame() {
         if (!registeredFio) return;
+        const rec = getStudentRecord(registeredFio);
+        rec.attempts += 1;
+        rec.lastEvent = "start_quest";
+        saveTrackerDb(trackerDb);
+
+        isActiveRun = true;
         currentStageIdx = 0;
         currentQuestionIdx = 0;
+        runErrors = 0;
+        questionAnsweredCorrectly = false;
+        lastStatusBanner = "";
+
         viewStart.classList.add("hidden");
         viewStage.classList.remove("hidden");
+        updateHud();
         renderQuestion();
+        sendToGoogleSheets("start_quest");
       }
 
-      function resetGame() {
-        currentStageIdx = 0;
-        currentQuestionIdx = 0;
-        questionAnsweredCorrectly = false;
-        viewStage.classList.add("hidden");
-        viewStart.classList.remove("hidden");
+      function resetGameToStart() {
+        returnToStartScreen(
+          "Расследование сброшено на старт. Нажмите «Начать квест заново», чтобы начать новую попытку.",
+          false
+        );
       }
+
+      // Античит: сворачивание окна или переключение вкладки во время активного квеста
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden && isActiveRun) {
+          triggerCheaterPenalty();
+        }
+      });
+
+      window.addEventListener("blur", () => {
+        if (isActiveRun && !registerModal.classList.contains("hidden") === false) {
+          // Небольшая задержка позволяет избежать ложных срабатываний на системных диалогах
+          setTimeout(() => {
+            if (isActiveRun && !document.hasFocus()) {
+              triggerCheaterPenalty();
+            }
+          }, 120);
+        }
+      });
 
       document.getElementById("btnOpenRegisterModal").addEventListener("click", openModal);
       document.getElementById("btnCloseRegisterModal").addEventListener("click", closeModal);
@@ -1247,7 +1642,24 @@
 
       btnStartInvestigation.addEventListener("click", startGame);
 
+      document.getElementById("btnFailReturnStart").addEventListener("click", () => {
+        fail3Modal.classList.add("hidden");
+        returnToStartScreen(
+          "Архив был опечатан после 3 ошибок. Нажмите «Начать квест заново», чтобы пройти расследование с самого начала.",
+          true
+        );
+      });
+
+      document.getElementById("btnCheatRestart").addEventListener("click", () => {
+        cheatModal.classList.add("hidden");
+        returnToStartScreen(
+          "Зафиксировано нарушение правил (сворачивание окна / смена вкладки). Нажмите «Начать квест заново», чтобы начать попытку с начала.",
+          true
+        );
+      });
+
       document.getElementById("btnNextQuestion").addEventListener("click", () => {
+        if (!isActiveRun) return;
         const stage = STAGES[currentStageIdx];
         if (currentQuestionIdx < stage.questions.length - 1) {
           currentQuestionIdx += 1;
@@ -1258,6 +1670,7 @@
       });
 
       document.getElementById("btnNextStage").addEventListener("click", () => {
+        if (!isActiveRun) return;
         if (currentStageIdx < STAGES.length - 1) {
           currentStageIdx += 1;
           currentQuestionIdx = 0;
@@ -1267,7 +1680,9 @@
         }
       });
 
-      document.getElementById("btnRestartGame").addEventListener("click", resetGame);
+      document.getElementById("btnRestartGame").addEventListener("click", resetGameToStart);
+
+      updateHud();
     })();
   </script>
 </body>
