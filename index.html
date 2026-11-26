@@ -752,7 +752,7 @@
     <section id="viewStart">
       <div class="lobby-grid">
         <div class="panel-story">
-          <div class="tag-1c">1С:ERP • 7 ЭТАПОВ И УЛИК • ЛИМИТ: 3 ОШИБКИ • АНТИМОШЕННИК</div>
+          <div class="tag-1c">1С:ERP • 7 ЭТАПОВ И УЛИК • ЛИМИТ: 3 ОШИБКИ • АНТИЧИТ</div>
           <h1 class="game-title">Дело о пропавшем балансе</h1>
 
           <div class="story-box">
@@ -762,7 +762,7 @@
           </div>
 
           <div class="rules-alert">
-            <strong>Сюжетный протокол следствия (3 ошибки и антимошенник):</strong>
+            <strong>Сюжетный протокол следствия (3 ошибки и античит):</strong>
             <br />• У детектива есть право всего на <strong>3 неверные версии (ошибки)</strong> за одно расследование. Если допустить <strong>3 ошибки</strong>, главный аудитор заподозрит халатность, <strong>архив дела опечатают, а следственные материалы аннулируют</strong> — придётся вернуться на старт и начать квест заново.
             <br />• Во время активного расследования запрещено сворачивать окно или переключаться на другие вкладки (поиск в ИИ и интернете фиксируется как нарушение: появится предупреждение «Мошенник!», а попытка будет сброшена на начало).
           </div>
@@ -909,7 +909,7 @@
     (function () {
       // Вставьте сюда URL развёрнутого веб-приложения Google Apps Script (Web App URL)
       // Пример: "https://script.google.com/macros/s/AKfycb.../exec"
-      const GOOGLE_SHEETS_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbxX-AkcnqXgPknoOY1N2tkwSxHDgbuEwP6KCyxyO4bJXunI1n8MJ3LDjqiq56zbqB0H/exec";
+      const GOOGLE_SHEETS_WEBAPP_URL = "";
       const MAX_ERRORS = 3;
       const STORAGE_KEY = "bgut_1c_erp_quest_tracker_v1";
 
@@ -1548,34 +1548,7 @@
         lastStatusBanner = "";
         lastStatusType = "normal";
         closeModal();
-  
-      const btnTogglePreface = document.getElementById("btnTogglePreface");
-      const prefaceBox = document.getElementById("prefaceBox");
-      const prefaceToggleArrow = document.getElementById("prefaceToggleArrow");
-
-      function syncPrefaceStateForViewport() {
-        const isMobile = window.innerWidth <= 768;
-        if (!isMobile) {
-          prefaceBox.classList.remove("mobile-collapsed");
-          btnTogglePreface.setAttribute("aria-expanded", "true");
-        } else {
-          prefaceBox.classList.add("mobile-collapsed");
-          btnTogglePreface.setAttribute("aria-expanded", "false");
-          prefaceToggleArrow.textContent = "▾";
-        }
-      }
-
-      btnTogglePreface.addEventListener("click", () => {
-        const willExpand = prefaceBox.classList.contains("mobile-collapsed");
-        prefaceBox.classList.toggle("mobile-collapsed", !willExpand);
-        btnTogglePreface.setAttribute("aria-expanded", String(willExpand));
-        prefaceToggleArrow.textContent = willExpand ? "▴" : "▾";
-      });
-
-      window.addEventListener("resize", syncPrefaceStateForViewport);
-
-      syncPrefaceStateForViewport();
-      updateHud();
+        updateHud();
         sendToGoogleSheets("register");
       }
 
@@ -1619,6 +1592,36 @@
         updateHud();
         cheatModal.classList.remove("hidden");
       }
+
+      const btnTogglePreface = document.getElementById("btnTogglePreface");
+      const prefaceBox = document.getElementById("prefaceBox");
+      const prefaceToggleArrow = document.getElementById("prefaceToggleArrow");
+
+      function syncPrefaceStateForViewport() {
+        const isMobile = window.innerWidth <= 768;
+        if (!prefaceBox || !btnTogglePreface) return;
+        if (!isMobile) {
+          prefaceBox.classList.remove("mobile-collapsed");
+          btnTogglePreface.setAttribute("aria-expanded", "true");
+        } else {
+          prefaceBox.classList.add("mobile-collapsed");
+          btnTogglePreface.setAttribute("aria-expanded", "false");
+          if (prefaceToggleArrow) prefaceToggleArrow.textContent = "▾";
+        }
+      }
+
+      if (btnTogglePreface && prefaceBox) {
+        btnTogglePreface.addEventListener("click", () => {
+          const willExpand = prefaceBox.classList.contains("mobile-collapsed");
+          prefaceBox.classList.toggle("mobile-collapsed", !willExpand);
+          btnTogglePreface.setAttribute("aria-expanded", String(willExpand));
+          if (prefaceToggleArrow) {
+            prefaceToggleArrow.textContent = willExpand ? "▴" : "▾";
+          }
+        });
+      }
+
+      window.addEventListener("resize", syncPrefaceStateForViewport);
 
       function renderQuestion() {
         const stage = STAGES[currentStageIdx];
@@ -1879,4 +1882,3 @@
   </script>
 </body>
 </html>
-
